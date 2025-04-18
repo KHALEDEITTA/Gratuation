@@ -14,12 +14,12 @@ import { ArrowRight } from 'lucide-react';
 const slides = [
   {
     image: slide1,
-    title: "Explore the world, embrace new adventures",
+    title: "Discover the wonders of Egypt",
     subtitle: "And create a lifetime of unforgettable memories.",
   },
   {
     image: slide2,
-    title: "Discover the wonders of Egypt",
+    title: "Embark on an unforgettable journey through the land of Pharaohs and Pyramids.  ",
     subtitle: "From ancient pyramids to vibrant cities.",
   },
   {
@@ -46,29 +46,29 @@ const HeroSlider = () => {
 
   return (
     <div
-      className="relative h-screen bg-cover bg-center flex items-center justify-center"
+      className="relative h-screen bg-cover bg-center flex items-center justify-start"
       style={{ backgroundImage: `url(${image})` }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-50 z-0" />
+      <div className="absolute inset-0 bg-black bg-opacity-[.09] z-0" />
 
       {/* Text Content */}
       <motion.div
-        className="relative z-10 text-white text-center px-6 md:px-20 max-w-4xl"
+        className="relative z-10 text-white ml-8  max-w-4xl" //px-6 md:px-20
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <p className="text-orange-400 font-bold mb-3 text-sm">
-          BEST DESTINATIONS AROUND THE WORLD
+        <p className="text- text-4xl font-bold mb-4  ">
+          BEST DESTINATIONS AROUND THE EGYPT
         </p>
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+        <h1 className="text-3xl md:text-3xl font-bold mb-5 ml-4 leading-tight">
           {title}
         </h1>
-        <p className="text-lg md:text-xl mb-6">{subtitle}</p>
+        <p className="text-2lg md:text-2xl mb-7 ml-7">{subtitle}</p>
 
-        <div className="flex justify-center gap-4">
-          <button className="bg-stone-50 text-black font-bold px-6 py-3 rounded-lg">
+        <div className="flex justify-start gap-4 ml-9">
+          <button className="bg-orange-700  border-2 border-orange-700 text-black hover:bg-opacity-85 hover:scale-105 hover:text-white font-bold px-6 py-3 rounded-lg">
             Find out more
           </button>
           

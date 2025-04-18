@@ -22,31 +22,31 @@ export default function NavBar() {
         {/* Links */}
         <ul className="hidden md:flex space-x-8 rtl:space-x-reverse font-medium justify-center ">
         <li className="cursor-pointer transition">
-          <Link className='no-underline text-gray-700 hover:text-sky-900'>Home</Link> 
+          <Link className='no-underline text-gray-700 hover:text-orange-600'>Home</Link> 
           </li>
           <li className="cursor-pointer transition">
-            <Link className='no-underline text-gray-700 hover:text-sky-900'>About</Link> 
+            <Link className='no-underline text-gray-700 hover:text-orange-600'>About</Link> 
             </li>
           <li className="cursor-pointer transition">
-            <Link className='no-underline text-gray-700 hover:text-sky-900'>Tours</Link> 
+            <Link className='no-underline text-gray-700 hover:text-orange-600'>Tours</Link> 
             </li>
           <li className="cursor-pointer transition">
-            <Link className='no-underline text-gray-700 hover:text-sky-900'>Content US</Link>
+            <Link className='no-underline text-gray-700 hover:text-orange-600'>Content US</Link>
             </li>
           <li className="cursor-pointer transition">
-            <Link className='no-underline text-gray-700 hover:text-sky-900'>Booking</Link>
+            <Link className='no-underline text-gray-700 hover:text-orange-600'>Booking</Link>
             </li>
         </ul>
 
         <div className='flex justify-between'> 
             
             <Link 
-            className="py-2 px-4 overflow-hidden rounded-xl bg-slate-50 text-lg mr-1  text-black no-underline border-2 border-gray-400 hover:bg-gray-400 hover:text-slate-50"
+            className="py-2 px-4 overflow-hidden rounded-xl bg-orange-50 bg-opacity-10 text-lg mr-1  text-black no-underline border-2 border-orange-300 hover:bg-orange-600 hover:text-slate-50 hover:border-orange-600"
             to={'/login'}>
               Login  
             </Link>
             <Link 
-            className="py-2 px-3 overflow-hidden rounded-xl bg-slate-50 text-lg  text-black hover:text-slate-50 hover:bg-gray-400  no-underline border-2 border-gray-400"
+            className="py-2 px-3 overflow-hidden rounded-xl bg-orange-50 text-lg bg-opacity-10 text-black hover:text-slate-50 hover:bg-orange-600  no-underline border-2 border-orange-300 hover:border-orange-600"
             to={'/signup'}>
               Sign Up
             </Link>
