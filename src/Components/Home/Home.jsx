@@ -1,10 +1,10 @@
 import React from 'react'
-import NavBar from '../Navbar/NavBar'
-import Slide from '../Slider/Slide'
-import Filter from '../Filter/Filter'
-import Service from '../Service/Service'
-import Destinations from '../Destinations/Destinations'
-import Footer from '../Footer/Footer'
+import NavBar from './../Navbar/NavBar'
+import Slide from './Slider/Slide'
+import Filter from './Filter/Filter'
+import Service from './Service/Service'
+import Destinations from './Destinations/Destinations'
+
 
 
 export default function Home() {
@@ -24,9 +24,7 @@ export default function Home() {
         <div>
             <Destinations />
         </div>
-        <Footer />
         
-      
         </>
     )
 }

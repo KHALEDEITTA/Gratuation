@@ -1,15 +1,13 @@
-// src/components/HeroSlider.jsx
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import slide1 from "../data/shutterstock_2164088641_0dbdb6dc4a.webp"
-import slide2 from "../data/alahramat_msr_a7acd11ef6.webp"
-import slide3 from "../data/shutterstock_1519243514_ead2797924.webp"
+import slide1 from "../../../Assets/shutterstock_2164088641_0dbdb6dc4a.webp"
+import slide2 from "../../../Assets/alahramat_msr_a7acd11ef6.webp"
+import slide3 from "../../../Assets/shutterstock_1519243514_ead2797924.webp"
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft } from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
+
 
 const slides = [
   {
@@ -31,7 +29,7 @@ const slides = [
 
 const HeroSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
   };

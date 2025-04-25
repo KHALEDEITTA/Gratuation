@@ -21,7 +21,7 @@ export function Login() {
         try {
             await signInWithEmailAndPassword(auth, Email, Password)
             alert("Logged in successfully!");
-            navigate("/Travel");
+            navigate("/");
         } catch (error) {
             alert(error.message);
             console.log(error);
