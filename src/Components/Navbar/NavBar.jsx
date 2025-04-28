@@ -55,7 +55,9 @@ const handleLogin = () => setIsLoggedIn(true);
             <Link className='no-underline text-gray-700 hover:text-orange-600'>Tours</Link> 
             </li>
           <li className="cursor-pointer transition">
-            <Link className='no-underline text-gray-700 hover:text-orange-600'>Content US</Link>
+            <Link className='no-underline text-gray-700 hover:text-orange-600'
+            to={'/contactus'}
+            >Content US</Link>
             </li>
           <li className="cursor-pointer transition">
             <Link className='no-underline text-gray-700 hover:text-orange-600'>Booking</Link>

@@ -40,3 +40,18 @@
   .slow-spin {
     animation: slow-spin 12s linear infinite;
   }
+
+
+    /* Content US */
+
+    .bgContactUs{
+      background-image: url(./Assets/cotactus.jpg);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .no-scrollbar {
+      -ms-overflow-style: none;  /* For Internet Explorer */
+      scrollbar-width: none;  /* For Firefox */
+    }
