@@ -7,6 +7,10 @@ import About from './Components/About/About.jsx'
 import Footer from './Components/Footer/Footer.jsx'
 import NavBar from './Components/Navbar/NavBar.jsx'
 import ContactUs from './Components/ContactUs/ContactUs.jsx'
+import TourDetails from './Components/Tour Details/TourDetails.jsx'
+import Personal_Information from './Components/Tour Details/Personal_Information.jsx'
+import Hotel from './Components/Hotels/Hotel.jsx'
+import TourCard from './Components/TourCard/TourCard.jsx'
 
 
 function App() {
@@ -21,6 +25,10 @@ function App() {
       <Route path='/signup' element={<SignUp />} />
       <Route path='/about' element={<About />} />
       <Route path='/contactus' element={<ContactUs />} />
+      <Route path='/TourDetails' element={<TourDetails />} />
+      <Route path='/Personal_Information' element={<Personal_Information />} />
+      <Route path='/Hotels' element={<Hotel />} />
+      <Route path='/TourCard' element={<TourCard />} />
     </Routes>
     <Footer />
     </BrowserRouter>

@@ -9,10 +9,8 @@ import Destinations from './Destinations/Destinations'
 
 export default function Home() {
     return (
-        <><div>
-            <NavBar />
-        </div>
-        <div className='mt-24'>
+        <>
+        <div >
             <Slide  />
         </div>
         <div>
