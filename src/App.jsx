@@ -11,6 +11,7 @@ import TourDetails from './Components/Tour Details/TourDetails.jsx'
 import Personal_Information from './Components/Tour Details/Personal_Information.jsx'
 import Hotel from './Components/Hotels/Hotel.jsx'
 import TourCard from './Components/TourCard/TourCard.jsx'
+import Tours from './Components/Tours/Tours.jsx'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Route path='/Personal_Information' element={<Personal_Information />} />
       <Route path='/Hotels' element={<Hotel />} />
       <Route path='/TourCard' element={<TourCard />} />
+      <Route path='/Tours' element={<Tours />} />
     </Routes>
     <Footer />
     </BrowserRouter>
