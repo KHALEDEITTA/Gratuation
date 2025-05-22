@@ -47,6 +47,12 @@
     .bgContactUs{
       background-image: url(./Assets/cotactus.jpg);
     }
+     .bgTour{
+      background-image: url(./Assets/alahramat_msr_a7acd11ef6.webp);
+    }
+      .topdestinat{
+      background-image: url(./Assets/topdest.jpg);
+    }
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }

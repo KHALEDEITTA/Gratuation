@@ -1,40 +1,52 @@
 
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebaseConfig';
+import { useDispatch, useSelector } from 'react-redux';
+import {  loginUser } from '../../store/authslic';
 
 
 
 
 export function Login() {
+ const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
 
-    const [Email, setEmail] = useState("")
+  const [Email, setEmail] = useState("")
     const [Password, setPassword] = useState("")
+   
+   
     const navigate = useNavigate();
 
-    const Submit = async (e) => {
-        e.preventDefault();
+ const dispatch = useDispatch();
+const form ={
+   "email":Email,
+    "password":Password,
+   
+}
+ const { token} = useSelector((state) => state.auth);
+if (isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginUser(form));
+        // dispatch(currentstate())
 
-        try {
-            await signInWithEmailAndPassword(auth, Email, Password)
-            alert("Logged in successfully!");
-            navigate("/");
-        } catch (error) {
-            alert(error.message);
-            console.log(error);
-
-        }
-    }
+     
+             navigate('/');
+      
+   
+  };
 
     return (
         <div className='w-[100%]' >
             <StyledWrapper className='flex justify-center items-center mt-20' >
 
                 <form className="form shadow-xl"
-                    onSubmit={Submit}>
+                    onSubmit={handleSubmit}>
                     <div className='flex mb-4'>
                         <Link
                             to={"/"}

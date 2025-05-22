@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import img1 from '../../Assets/WhatsApp Image 2025-05-04 at 7.08.57 PM.jpeg';
+import { Link } from 'react-router';
 
 const allTours = [
   {
@@ -71,7 +72,7 @@ const allTours = [
 ];
 
 const TourCard = ({ tour }) => (
-  <div className="bg-white rounded shadow p-4 w-full md:w-[300px]">
+ <Link to={'/TourDetails'}> <div className="bg-white rounded shadow p-4 w-full md:w-[300px]">
     <img src={tour.image} alt={tour.title} className="rounded mb-4 h-[180px] w-full object-cover" />
     <h3 className="font-semibold mb-2">{tour.title}</h3>
     <div className="text-sm text-gray-600 flex items-center gap-4 mb-2">
@@ -81,7 +82,7 @@ const TourCard = ({ tour }) => (
     <p className="text-sm">
       From <span className="text-blue-700 font-bold">${tour.price}</span>
     </p>
-  </div>
+  </div></Link>
 );
 
 const DestinationGuide = () => {
@@ -120,7 +121,7 @@ const DestinationGuide = () => {
 
   return (
     <div className="font-sans">
-      <div className="relative h-[400px] bg-cover bg-center bgContactUs">
+      <div className="relative h-[400px] bg-cover bg-center bgTour">
         <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
           <h1 className="text-white text-5xl font-bold">Cairo</h1>
         </div>

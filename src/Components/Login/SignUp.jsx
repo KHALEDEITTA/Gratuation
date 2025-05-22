@@ -1,52 +1,67 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { auth } from './firebaseConfig';
+import { useSelector,useDispatch } from 'react-redux';
+import { Register } from '../../store/authslic';
 
 export function SignUp() {
 
     const [Email, setEmail] = useState("")
     const [Password, setPassword] = useState("")
-    const [Name, setName] = useState("")
+    const [firstName, setfirstName] = useState("")
+    const [lastName, setlastName] = useState("")
+    const [nationality, setnationality] = useState("")
     const [PasswordR, setPasswordR] = useState("")
     const [Accept, SetAccept] = useState(false)
     const navigate = useNavigate();
 
+ const dispatch = useDispatch();
+const form ={
+   "email":Email,
+    "password":Password,
+    "firstName":firstName,
+    "lastName":lastName,
+    "nationality":"egypt"
+}
+ const { success } = useSelector((state) => state.auth);
 
-    const Submit = async (e) => {
-        e.preventDefault()
-        SetAccept(true)
 
-        try {
-            await createUserWithEmailAndPassword(auth, Email, Password, Name)
-            navigate("/login");
-        } catch (error) {
-            alert(error.message);
-            console.log(error);
 
-        }
-
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(Register(form));
+    navigate('/login');
+ 
+    console.log(success)
+  };
 
     return (
         <>
             <div className='w-[100%] '>
                 <StyledWrapper className='flex justify-center items-center mt-20'>
                     <form className="form drop-shadow-xl"
-                        onSubmit={Submit}
+                        onSubmit={handleSubmit}
                     >
                         <p className="title">Register </p>
                         <p className="message">Signup now and get full access to our app. </p>
 
                         <label>
                             <input className="input" type="text" placeholder required
-                                value={Name}
-                                onChange={(e) => setName(e.target.value)}
+                                value={firstName}
+                                onChange={(e) => setfirstName(e.target.value)}
                             />
                             <span>Firstname</span>
                         </label>
-                        {Name === "" && Accept && <p className='text-red-500 text-sm'>please enter your name</p>}
+                        {firstName === "" && Accept && <p className='text-red-500 text-sm'>please enter your name</p>}
+
+ <label>
+                            <input className="input" type="text" placeholder required
+                                value={lastName}
+                                onChange={(e) => setlastName(e.target.value)}
+                            />
+                            <span>LastName</span>
+                        </label>
+                        {lastName === "" && Accept && <p className='text-red-500 text-sm'>please enter your name</p>}
 
 
                         <label>

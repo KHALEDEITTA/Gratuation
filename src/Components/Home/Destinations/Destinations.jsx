@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import img1 from '../../../Assets/d1.jpeg'
 import img4 from '../../../Assets/download (3).png'
 import img5 from '../../../Assets/download (4).png'
@@ -8,6 +8,8 @@ import img2 from '../../../Assets/edinburgh-castle-guide-feautred-guide.webp'
 import img3 from '../../../Assets/d1.jpeg'
 import { GiCommercialAirplane } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchalldestination } from '../../../store/destinationslic';
 const destinations = [
   { city: 'London, UK', price: '$4.2k', days: '12 Days Trip', img: img1 },
   { city: 'Rome, Italy', price: '$3.42k', days: '10 Days Trip', img: img2},
@@ -16,6 +18,12 @@ const destinations = [
 ];
 
 const Destinations = () => {
+  const dispatch=useDispatch()
+  useEffect(()=>{
+    dispatch(fetchalldestination())
+    
+  })
+  const {list}=useSelector((state)=>state.destinations)
   return (
     <section className="py-12 flex flex-col Destination relative  items-center justify-center px-6 bg-gray-50">
 

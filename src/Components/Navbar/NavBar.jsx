@@ -7,25 +7,26 @@ import { signOut } from 'firebase/auth';
 import { LogOut, ShoppingCart, User } from "lucide-react";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./Avatar";
+import { useDispatch, useSelector } from 'react-redux';
+import {  logout } from '../../store/authslic';
 
 export default function NavBar() {
+   const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
+  
     const [isOpen, setIsOpen] = useState(false);
 
-  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+const dispatch=useDispatch()
   
-  // التحقق مما إذا كان المستخدم مسجّل دخول عند تحميل الصفحة
-  useEffect(() => {
-    const user = auth.currentUser;
-    setIsLoggedIn(!!user);
-}, []);
 
-  // تسجيل خروج المستخدم
-  const handleLogout = async () => {
-    await signOut(auth);
+  const handleLogout =  () => {
+     dispatch(logout())
     setIsLoggedIn(false);
     
 };
+// const token =localStorage.getItem('token')
+// const user =localStorage.getItem('username')
+const {token,user}=useSelector((state)=>state.auth)
 const handleLogin = () => setIsLoggedIn(true);
   // const handleLogout = () => setIsLoggedIn(false);
   
@@ -52,19 +53,24 @@ const handleLogin = () => setIsLoggedIn(true);
             >About</Link> 
             </li>
           <li className="cursor-pointer transition">
-            <Link className='no-underline text-gray-700 hover:text-orange-600'>Tours</Link> 
+            <Link className='no-underline text-gray-700 hover:text-orange-600' 
+            
+             to={'/TourCard'}
+            >Tours</Link> 
             </li>
           <li className="cursor-pointer transition">
             <Link className='no-underline text-gray-700 hover:text-orange-600'
             to={'/contactus'}
             >Content US</Link>
             </li>
+
           <li className="cursor-pointer transition">
             <Link className='no-underline text-gray-700 hover:text-orange-600'>Booking</Link>
             </li>
+            {console.log(user)}
         </ul>
 
-        {!isLoggedIn ? (
+        {!isAuthenticated ? (
         <div className='flex justify-between'> 
             
         <Link 
@@ -92,7 +98,7 @@ const handleLogin = () => setIsLoggedIn(true);
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               </svg>
 
-            <span className="text-black font-semibold">Khaled Said</span>
+            <span className="text-black font-semibold">{user?.split('@')[0]} </span>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="mt-2 bg-white rounded-xl shadow-lg p-2 space-y-1">
             <DropdownMenuItem className="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
@@ -104,7 +110,7 @@ const handleLogin = () => setIsLoggedIn(true);
               Your Orders
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={handleLogout}
+              onClick={(handleLogout)}
               className="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-lg cursor-pointer text-red-500"
             >
               <LogOut size={18} />
