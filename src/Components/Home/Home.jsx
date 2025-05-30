@@ -4,6 +4,7 @@ import Slide from './Slider/Slide'
 import Filter from './Filter/Filter'
 import Service from './Service/Service'
 import Destinations from './Destinations/Destinations'
+import TopDestinations from '../TopDestinations/TopDestinations'
 
 
 

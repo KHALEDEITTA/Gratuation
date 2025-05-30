@@ -10,6 +10,7 @@ import { GiCommercialAirplane } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchalldestination } from '../../../store/destinationslic';
+import { Link } from 'react-router';
 const destinations = [
   { city: 'London, UK', price: '$4.2k', days: '12 Days Trip', img: img1 },
   { city: 'Rome, Italy', price: '$3.42k', days: '10 Days Trip', img: img2},
@@ -22,26 +23,28 @@ const Destinations = () => {
   useEffect(()=>{
     dispatch(fetchalldestination())
     
-  })
+  },[])
   const {list}=useSelector((state)=>state.destinations)
   return (
     <section className="py-12 flex flex-col Destination relative  items-center justify-center px-6 bg-gray-50">
 
       <h2 className="text-3xl font-bold mb-10 text-center text-blue-900">Top Destinations</h2>
       <div className="grid lg:w-3/4 grid-cols-1 md:grid-cols-3  gap-12">
-        {destinations.map((dest, index) => (
-          <div key={index} className="bg-white z-10 relative  shadow-zinc-500  shadow-[0_4px_8px_rgba(0,0,0,0.1)] rounded-lg overflow-hidden lg:w-full sm:w-1/2 h-[390px]">
-            <img src={dest.img} alt={dest.city} className="w-full h-[268px] " />
+        {list.slice(0,3).map((dest, index) => (
+       <Link to={`/TourCard/${dest.destinationId}`}>   <div key={index} className="bg-white z-10 relative  shadow-zinc-500  shadow-[0_4px_8px_rgba(0,0,0,0.1)] rounded-lg overflow-hidden lg:w-full sm:w-1/2 h-[390px]">
+            <img src={dest.coverPhoto ||img1} alt={dest.city} className="w-full h-[268px] " />
             <div className="p-4">
             <div className='flex justify-between items-center mb-3'>
 
-           <div className='flex justify-start items-center gap-2 text-2xl'> <GiCommercialAirplane className='text-xl'/><h3 className="text-lg text-gray-500 font-semibold">{dest.city}</h3></div>
-            <p className=" text-gray-500 text-lg  font-normal">{dest.price}</p>
+           <div className='flex justify-start items-center gap-2 text-2xl'> <GiCommercialAirplane className='text-xl'/><h3 className="text-lg text-gray-500 font-semibold">{dest.destinationName||"cairo"}</h3></div>
+           <div className='flex gap-1'> 
+</div>
             </div>
 
-             <div className='flex justify-start items-center gap-1 text-2xl'><FaHome  className='text-xl'/> <p className=" text-gray-500 text-sm">{dest.days}</p></div>
+             <div className='flex justify-start items-center gap-1 text-2xl'><h6 className=" text-gray-500 text-lg  font-normal">{dest.numberOfTrips}</h6>
+          <p className='text-gray-500 text-lg  font-normal'>:عدد الرحلات</p></div>
             </div>
-          </div>
+          </div></Link>
         ))}
       </div>
       <img className="absolute top-1/4 custom-bounce  left-[6%]" src={img4} alt="image1"/>

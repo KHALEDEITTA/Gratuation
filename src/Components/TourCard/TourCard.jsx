@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import img1 from '../../Assets/WhatsApp Image 2025-05-04 at 7.08.57 PM.jpeg';
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchonedestination } from '../../store/destinationslic';
 
 const allTours = [
   {
@@ -73,8 +75,8 @@ const allTours = [
 
 const TourCard = ({ tour }) => (
  <Link to={'/TourDetails'}> <div className="bg-white rounded shadow p-4 w-full md:w-[300px]">
-    <img src={tour.image} alt={tour.title} className="rounded mb-4 h-[180px] w-full object-cover" />
-    <h3 className="font-semibold mb-2">{tour.title}</h3>
+    <img src={tour.coverImage} alt={tour.label} className="rounded mb-4 h-[180px] w-full object-cover" />
+    <h3 className="font-semibold mb-2">{tour.label}</h3>
     <div className="text-sm text-gray-600 flex items-center gap-4 mb-2">
       <span>📍 {tour.location}</span>
       <span>⏱ {tour.duration}</span>
@@ -86,27 +88,32 @@ const TourCard = ({ tour }) => (
 );
 
 const DestinationGuide = () => {
+  const param=useParams()
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedDurations, setSelectedDurations] = useState([]);
   const [selectedGroupSizes, setSelectedGroupSizes] = useState([]);
-  const [sortOrder, setSortOrder] = useState("none");
+  const dispatch=useDispatch()
+  useEffect(()=>{
+dispatch(fetchonedestination(param.id))
 
+  },[])
+  const [sortOrder, setSortOrder] = useState("none");
+const {listForOne,desinationName}=useSelector((state)=>state.destinations)
   const handleCheckboxChange = (value, setState) => {
     setState(prev =>
       prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]
     );
     setPage(1);
   };
-
-  const filteredTours = allTours
+  const filteredTours = listForOne
     .filter(tour => {
-      const matchesSearch = tour.title.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesType = selectedTypes.length ? selectedTypes.includes(tour.type) : true;
-      const matchesDuration = selectedDurations.length ? selectedDurations.includes(tour.hours) : true;
-      const matchesSize = selectedGroupSizes.length ? selectedGroupSizes.includes(tour.size) : true;
-      return matchesSearch && matchesType && matchesDuration && matchesSize;
+      const matchesSearch = tour.label.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesType = selectedTypes.length ? selectedTypes.includes(tour.tripType) : true;
+      const matchesDuration = selectedDurations.length ? selectedDurations.includes(tour.duration) : true;
+      // const matchesSize = selectedGroupSizes.length ? selectedGroupSizes.includes(tour.size) : true;
+      return matchesSearch && matchesType && matchesDuration ;
     })
     .sort((a, b) => {
       if (sortOrder === "asc") return a.price - b.price;
@@ -123,12 +130,12 @@ const DestinationGuide = () => {
     <div className="font-sans">
       <div className="relative h-[400px] bg-cover bg-center bgTour">
         <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-          <h1 className="text-white text-5xl font-bold">Cairo</h1>
+          <h1 className="text-white text-5xl font-bold">{desinationName}</h1>
         </div>
       </div>
 
       <div className="px-10 py-4 text-sm text-gray-600 space-x-2">
-        <span>Home</span> {'>'} <span>Destinations</span> {'>'} <span className="text-black font-semibold">Cairo</span>
+        <span>Home</span> {'>'} <span>Destinations</span> {'>'} <span className="text-black font-semibold">{desinationName}</span>
       </div>
 
       <div className="px-10 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -170,7 +177,7 @@ const DestinationGuide = () => {
               setPage(1);
             }}
           />
-
+{console.log(listForOne)}
           <div>
             <h4 className="font-semibold mb-2">What are you looking for?</h4>
             <ul className="space-y-1 text-sm">
@@ -236,8 +243,7 @@ const DestinationGuide = () => {
               <p>No tours found matching your filters.</p>
             )}
           </div>
-
-       
+ 
           <div className="mt-6 flex gap-2">
             {[...Array(totalPages)].map((_, i) => (
               <button

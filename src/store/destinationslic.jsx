@@ -6,6 +6,11 @@ export const fetchalldestination = createAsyncThunk('destinations/fetchAll', asy
   const res = await axiosInstance.get('/destinations');
   return res.data;
 });
+export const fetchonedestination= createAsyncThunk('fetchonedestination/fetchAll', async (param) => {
+  const res = await axiosInstance.get(`/destinations/${param}`);
+  console.log(res.data.data)
+  return res.data.data
+});
 
 export const adddestination = createAsyncThunk('flight/add', async (flightData) => {
   const res = await axiosInstance.post('/destinations/', flightData);
@@ -28,6 +33,8 @@ const destinationtSlice = createSlice({
     list: [],
     status: 'idle',
     error: null,
+    desinationName:'',
+    listForOne:[]
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -40,6 +47,18 @@ const destinationtSlice = createSlice({
         state.list = action.payload.data;
       })
       .addCase(fetchalldestination.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+       .addCase(fetchonedestination.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchonedestination.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.listForOne = action.payload.trips;
+        state.desinationName = action.payload.destinationName;
+      })
+      .addCase(fetchonedestination.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })

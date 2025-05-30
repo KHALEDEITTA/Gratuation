@@ -8,7 +8,12 @@ import image_7 from '../../Assets/ciudad-maderas-MXbM1NrRqtI-unsplash.jpg'
 import DestinationsComponent from './DestinationsComponent/DestinationsComponent'
 import { Link } from 'react-router'
 export default function TopDestinations() {
-
+// const dispatch=useDispatch()
+//   useEffect(()=>{
+//     dispatch(fetchalldestination())
+    
+//   })
+//   const {list}=useSelector((state)=>state.destinations)
     const Destinations =[
         {
             id: 1,

@@ -37,9 +37,10 @@ function App() {
       <Route path='/TourDetails' element={    <ProtectedRoute><TourDetails /></ProtectedRoute>} />
       <Route path='/Personal_Information' element={   <ProtectedRoute><Personal_Information /> </ProtectedRoute>} />
       <Route path='/Hotels' element={   <ProtectedRoute><Hotel /> </ProtectedRoute>} />
-      <Route path='/TourCard' element={  <ProtectedRoute><TourCard />  </ProtectedRoute>} />
+      <Route path='/TourCard/:id' element={  <ProtectedRoute><TourCard />  </ProtectedRoute>} />
       <Route path='/TopDestinations' element={  <ProtectedRoute><TopDestinations />  </ProtectedRoute>} />
       <Route path='/Tours' element={ <ProtectedRoute><Tours />  </ProtectedRoute>} /> 
+      {/* <Route path='/DestinationGuide' element={ <Desti><Tours />  </ProtectedRoute>} />  */}
       <Route path="*" element={<div>Not Found</div>} />
 
     </Routes>
