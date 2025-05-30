@@ -7,13 +7,16 @@ import image_6 from '../../Assets/mrsa_mtrwh_4a2989af89.webp'
 import image_7 from '../../Assets/ciudad-maderas-MXbM1NrRqtI-unsplash.jpg'
 import DestinationsComponent from './DestinationsComponent/DestinationsComponent'
 import { Link } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { fetchalldestination } from '../../store/destinationslic'
 export default function TopDestinations() {
-// const dispatch=useDispatch()
-//   useEffect(()=>{
-//     dispatch(fetchalldestination())
+const dispatch=useDispatch()
+  useEffect(()=>{
+    dispatch(fetchalldestination())
     
-//   })
-//   const {list}=useSelector((state)=>state.destinations)
+  },[])
+  const {list}=useSelector((state)=>state.destinations)
     const Destinations =[
         {
             id: 1,
@@ -82,11 +85,11 @@ export default function TopDestinations() {
     </div>
     
     <div className='grid grid-cols-4 gap-12 mx-14 mt-8'>
-    {Destinations.map((tour)=>{
+    {list.map((tour)=>{
         return(
-            <div key={tour.id}>
-                <DestinationsComponent image={tour.image} name={tour.city} tours={tour.tours} color={tour.color}/>
-            </div>
+            <div key={tour.destinationId}>
+               <Link to={`/TourCard/${tour.destinationId}`}><DestinationsComponent image={tour.coverPhoto ||image_1} name={tour.destinationName||"empty"} tours={tour.numberOfTrips} color={tour.color}/>
+          </Link>   </div>
         )
     })}
 

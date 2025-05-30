@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import img1 from '../../Assets/mrsa_mtrwh_4a2989af89.webp'
 import img2 from '../../Assets/tour details.jpg'
 import { Calendar, Users, Clock, MapPin, CheckCircle } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
+import { fetchOneTrip } from "../../store/trip/tripslic";
+import { useDispatch, useSelector } from "react-redux";
 export default function TourDetails() {
-  const images = [img1, img2, img1, img1]; 
+   const param=useParams()
   const [currentIndex, setCurrentIndex] = useState(0); 
+ const dispatch=useDispatch()
+  useEffect(()=>{
+dispatch(fetchOneTrip(param.id))
+
+  },[])
+const {currentTrip}=useSelector((state)=>state.trip)
+ 
+  const images = currentTrip?.tripImages.length?    currentTrip?.tripImages :[img1,img2,img1,img2]; 
 
   const nextImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -28,7 +38,7 @@ export default function TourDetails() {
 
       <div className="relative h-[75vh]">
         <img
-          src={img2}
+          src={currentTrip.coverImage || img1}
           alt="Khan El Khalili"
           className="w-full h-full object-cover"
         />
@@ -36,14 +46,14 @@ export default function TourDetails() {
 
 
       <div className="bg-gray-100 text-sm text-gray-700 px-4 py-2">
-        Home &gt; Tours & Activities &gt;{" "}
+        Home &gt; Tours & Activities &gt;{currentTrip?.label||'empty'}
 
       </div>
 
     
       <div className="flex justify-between items-center px-4 py-4">
         <h1 className="text-xl md:text-2xl font-semibold max-w-[70%]">
-          Tour of Historic Cairo with Al-Muizz Street, Alazhar mosque and Khan El Khalil Bazar
+        {currentTrip.label}
         </h1>
         <div className="text-red-600 text-sm font-semibold flex items-center gap-1">
           <svg
@@ -121,22 +131,22 @@ export default function TourDetails() {
         <div className="flex flex-col items-center gap-2">
           <MapPin className="text-red-600 w-5 h-5" />
           <span className="font-medium">Location</span>
-          <span className="text-gray-500">Cairo</span>
+          <span className="text-gray-500">{currentTrip.destination}</span>
         </div>
         <div className="flex flex-col items-center gap-2">
           <Clock className="text-red-600 w-5 h-5" />
           <span className="font-medium">Duration</span>
-          <span className="text-gray-500">8 Hours</span>
+          <span className="text-gray-500">{currentTrip.duration}</span>
         </div>
         <div className="flex flex-col items-center gap-2">
           <Calendar className="text-red-600 w-5 h-5" />
           <span className="font-medium">Run</span>
-          <span className="text-gray-500">Everyday</span>
+          <span className="text-gray-500">{currentTrip.run}</span>
         </div>
         <div className="flex flex-col items-center gap-2">
           <Users className="text-red-600 w-5 h-5" />
           <span className="font-medium">Group Size</span>
-          <span className="text-gray-500">Group Tour</span>
+          <span className="text-gray-500">{currentTrip.tripType} </span>
         </div>
       </div>
 
@@ -144,7 +154,7 @@ export default function TourDetails() {
       <div className="bg-gray-100 p-6 rounded shadow-md max-w-xl mx-auto">
         <h3 className="text-lg font-semibold mb-4">Total price</h3>
         <div className="flex items-center gap-2 mb-6">
-          <span className="text-red-600 font-medium">$ inc. taxes</span>
+          <span className="text-red-600 font-medium">$ {currentTrip.price}</span>
           <span className="text-green-500 text-xl">✔</span>
         </div>
 
@@ -176,7 +186,8 @@ export default function TourDetails() {
                   <option key={n}>{n}</option>
                 ))}
               </select>
-            </div>
+            </div>{
+            }
             <div className="flex-1">
               <label className="block text-sm font-medium mb-1">
                 Child (Age: 6-11.99)
@@ -191,7 +202,7 @@ export default function TourDetails() {
 
             <Link 
             className="mt-6 w-[70%] ml-20 text-center bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
-            to={'/Personal_Information'}
+            to={`/TourDetails/${currentTrip.tripId}/Personal_Information`}
             >
             Proceed to Booking
             </Link>
@@ -202,24 +213,7 @@ export default function TourDetails() {
 <div className="px-4 md:px-20 py-8 text-gray-800 max-w-4xl">
   <h2 className="text-2xl font-serif font-semibold mb-6">Tour description</h2>
   <p className="mb-4 font-light leading-relaxed">
-    Cairo’s stunning Islamic architecture has earned it the nickname ‘the city of a thousand minarets.
-    Here, you will see the Historic Cairo before 1000 years.
-  </p>
-  <p className="mb-4 font-light leading-relaxed">
-    Get pick-ed up from your hotel to head towards Al Muizz Street, which is a major north-to-south Street
-    in the walled city of historic Cairo. It constituted the main axis of the city's economic zones where
-    its souqs (markets) were concentrated. The street's prestige also attracted the construction of many
-    monumental religious and charitable buildings commissioned by Egypt's rulers and elites, making it a
-    dense repository of historic Islamic architecture in Cairo.
-  </p>
-  <p className="mb-4 font-light leading-relaxed">
-    One of the most iconic sections of Muizz Street known as Bayn al-Qasrayn, featuring the famous Complex
-    of Sultan Qalawun, and behind it the Mosque-Madrassa of Sultan Barquq. Visit also Bab El Fotouh and many
-    valuable monuments that you have never seen before and will never forget.
-  </p>
-  <p className="mb-4 font-light leading-relaxed">
-    Al-Azhar Mosque is the most important in Egypt and the most famous in the Muslim world. It has been a
-    mosque and a university for more than a thousand years now..
+   {currentTrip.description}
   </p>
 </div>
 
@@ -229,6 +223,13 @@ export default function TourDetails() {
   <div>
     <h2 className="text-2xl font-serif font-semibold mb-4">Inclusions</h2>
     <ul className="list-disc list-inside text-sm space-y-1">
+      {
+        currentTrip.inclusions.map((item)=>(
+
+      <li>{item.content}</li>
+
+        ))
+      }
       <li>Hotel pick-up and drop-off</li>
       <li>Entrance fees</li>
       <li>Certified Egyptologist</li>
@@ -244,7 +245,7 @@ export default function TourDetails() {
   </div>
   <div>
     <h2 className="text-2xl font-serif font-semibold mb-4">Meeting point</h2>
-    <p className="text-sm">Please meet Travco Representative at your hotel lobby</p>
+    <p className="text-sm">{currentTrip.meetingPoint}</p>
   </div>
 
 
@@ -267,7 +268,7 @@ export default function TourDetails() {
   </div>
   <div>
     <h2 className="text-2xl font-serif font-semibold mb-4">Cancellation policy</h2>
-    <p className="text-sm">Receive a 100% refund if you cancel up to 24 hours before the experience begins</p>
+    <p className="text-sm">{currentTrip.cancellationPolicy}</p>
   </div>
 </div>
 

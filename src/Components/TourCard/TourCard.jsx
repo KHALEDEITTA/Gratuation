@@ -74,7 +74,7 @@ const allTours = [
 ];
 
 const TourCard = ({ tour }) => (
- <Link to={'/TourDetails'}> <div className="bg-white rounded shadow p-4 w-full md:w-[300px]">
+ <Link to={`/TourDetails/${tour.tripId}`}> <div className="bg-white rounded shadow p-4 w-full md:w-[300px]">
     <img src={tour.coverImage} alt={tour.label} className="rounded mb-4 h-[180px] w-full object-cover" />
     <h3 className="font-semibold mb-2">{tour.label}</h3>
     <div className="text-sm text-gray-600 flex items-center gap-4 mb-2">
@@ -135,12 +135,14 @@ const {listForOne,desinationName}=useSelector((state)=>state.destinations)
       </div>
 
       <div className="px-10 py-4 text-sm text-gray-600 space-x-2">
-        <span>Home</span> {'>'} <span>Destinations</span> {'>'} <span className="text-black font-semibold">{desinationName}</span>
+        <span>Home</span> {'>'} <Link to={'/TopDestinations'}><span>
+          Destinations
+          </span></Link> {'>'} <span className="text-black font-semibold">{desinationName}</span>
       </div>
 
       <div className="px-10 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="text-lg">
-          Found <span className="text-red-600 font-bold">{filteredTours.length}</span> Results For <span className="text-red-600 font-bold">Cairo</span>
+          Found <span className="text-red-600 font-bold">{filteredTours.length}</span> Results For <span className="text-red-600 font-bold">{desinationName}</span>
         </div>
         <div className="flex items-center gap-4">
           <span className="text-red-600 flex items-center gap-1">

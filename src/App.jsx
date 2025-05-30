@@ -34,8 +34,8 @@ function App() {
       <Route path='/signup' element={<SignUp />} />
       <Route path='/about' element={   <ProtectedRoute> <About  /> </ProtectedRoute>} />
       <Route path='/contactus' element={    <ProtectedRoute><ContactUs /></ProtectedRoute>} />
-      <Route path='/TourDetails' element={    <ProtectedRoute><TourDetails /></ProtectedRoute>} />
-      <Route path='/Personal_Information' element={   <ProtectedRoute><Personal_Information /> </ProtectedRoute>} />
+      <Route path='/TourDetails/:id' element={    <ProtectedRoute><TourDetails /></ProtectedRoute>} />
+      <Route path='/TourDetails/:id/Personal_Information' element={   <ProtectedRoute><Personal_Information /> </ProtectedRoute>} />
       <Route path='/Hotels' element={   <ProtectedRoute><Hotel /> </ProtectedRoute>} />
       <Route path='/TourCard/:id' element={  <ProtectedRoute><TourCard />  </ProtectedRoute>} />
       <Route path='/TopDestinations' element={  <ProtectedRoute><TopDestinations />  </ProtectedRoute>} />

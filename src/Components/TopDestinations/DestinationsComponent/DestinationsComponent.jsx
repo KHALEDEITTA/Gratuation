@@ -4,7 +4,7 @@ export default function DestinationsComponent({ image, name, tours ,color }) {
   return (
     <>
   
-    <div className={`relative rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:shadow-${color} transition-shadow duration-300 group w-[320px] h-[340px]`}>
+    <div className={`relative rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:shadow-cyan-200 transition-shadow duration-300 group w-[320px] h-[340px]`}>
       <img
         src={image}
         alt={name}
@@ -21,7 +21,7 @@ export default function DestinationsComponent({ image, name, tours ,color }) {
       </div>
 
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-lg opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-opacity duration-300">
-        {tours} 
+        {tours} Tours
       </div>
     </div>
  
