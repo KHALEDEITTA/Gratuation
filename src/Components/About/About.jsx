@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import ground from '../../Assets/mrsa_mtrwh_4a2989af89.webp'
+import ground_1 from '../../Assets/about_6.jpg'
+import ground_2 from '../../Assets/about_4.jpg'
+import ground_3 from '../../Assets/about_5.jpg'
+import ground_4 from '../../Assets/about_2.jpg'
+import ground_5 from '../../Assets/about_3.jpg'
+import ground_6 from '../../Assets/about_1.jpg'
 import { CircleArrowDown , CircleArrowUp  } from 'lucide-react';
 import Service from './About Services/Service';
 import Detiles from './About Detils/Detiles';
@@ -16,7 +21,7 @@ export default function About() {
                     {/* image background */}
     <div className="relative h-[500px] w-full">
         <img
-        src={ground}
+        src={ground_1}
         alt="About Background"
         className="w-full h-full object-center"
     />
@@ -35,16 +40,19 @@ export default function About() {
         {/* Left Column - Images */}
         <div className="md:w-1/2 space-y-6">
             <div className="rounded-lg overflow-hidden shadow-lg">
-                <img src={ground} alt="Travel destination" className="w-full h-auto object-cover" />
+                <img src={ground_2} alt="Travel destination" className="w-full h-auto object-cover" />
             </div>
             <div className="grid grid-cols-2 gap-4">
-                <div className="rounded-lg overflow-hidden shadow-md">
-                    <img src={ground} alt="Office location" className="w-full h-full object-cover" />
+                <div className="rounded-lg overflow-hidden shadow-md grid grid-cols-1 gap-4">
+                    <img src={ground_3} alt="Office location" className="w-full h-full object-cover" />
+                    <div className="rounded-lg overflow-hidden shadow-md">
+                        <img src={ground_6} alt="Office location" className="w-full h-full object-cover" />
+                    </div>
                 </div>
                 <div className="rounded-lg overflow-hidden shadow-md grid grid-cols-1 gap-4">
-                        <img src={ground} alt="Happy travelers" className="w-full h-full object-cover" />
+                        <img src={ground_4} alt="Happy travelers" className="w-full h-full object-cover" />
                     <div className="rounded-lg overflow-hidden shadow-md">
-                        <img src={ground} alt="Office location" className="w-full h-full object-cover" />
+                        <img src={ground_5} alt="Office location" className="w-full h-full object-cover" />
                     </div>
                 </div>
                 

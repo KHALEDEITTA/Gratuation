@@ -11,17 +11,32 @@ import { ArrowRight } from 'lucide-react';
 
 const slides = [
   {
-    image: slide1,
+    image: "https://plus.unsplash.com/premium_photo-1661962355663-2a435ccf844d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "Discover the wonders of Egypt",
     subtitle: "And create a lifetime of unforgettable memories.",
   },
   {
-    image: slide2,
+    image: "https://images.unsplash.com/photo-1525604529863-915380184a43?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "Embark on an unforgettable journey through the land of Pharaohs and Pyramids.  ",
     subtitle: "From ancient pyramids to vibrant cities.",
   },
   {
-    image: slide3,
+    image: "https://images.unsplash.com/photo-1681158077449-77f23f629f0d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Embark on an unforgettable journey through the land of Pharaohs and Pyramids.  ",
+    subtitle: "From ancient pyramids to vibrant cities.",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1632944398987-494eebe663be?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Relax and unwind on beautiful beaches",
+    subtitle: "Let your soul soak in the serenity.",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1593663094448-9ea85c6e8456?q=80&w=1984&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Relax and unwind on beautiful beaches",
+    subtitle: "Let your soul soak in the serenity.",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1593663094448-9ea85c6e8456?q=80&w=1984&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "Relax and unwind on beautiful beaches",
     subtitle: "Let your soul soak in the serenity.",
   },
@@ -43,8 +58,11 @@ const HeroSlider = () => {
   const { image, title, subtitle } = slides[currentIndex];
 
   return (
+    <div className="h-screen m-auto">
+
+  
     <div
-      className="relative h-screen bg-cover bg-center flex items-center justify-start"
+      className="relative h-full bg-cover bg-center flex items-center justify-start"
       style={{ backgroundImage: `url(${image})` }}
     >
       {/* Overlay */}
@@ -88,6 +106,7 @@ const HeroSlider = () => {
             <ArrowRight className="hover:text-red-500" />
         </button>
       </div>
+    </div>
     </div>
   );
 };

@@ -61,3 +61,12 @@
       -ms-overflow-style: none;  /* For Internet Explorer */
       scrollbar-width: none;  /* For Firefox */
     }
+        .servess{
+      background-image: url(./Assets/destination1.png);
+      background-position: center;
+      
+    }
+    .footer{
+      background-image: url(./Assets/foot.jpg);
+      
+    }

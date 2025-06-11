@@ -18,7 +18,9 @@ import TopDestinations from './Components/TopDestinations/TopDestinations.jsx'
 import { ToastContainer } from "react-toastify";
 import Payment from './Components/payment/payment.jsx'
 import Cart from './Components/bookingCart/bookingCart.jsx'
+import 'aos/dist/aos.css';
 function App() {
+  
 
   return (
     <>
@@ -29,8 +31,7 @@ function App() {
       <Route path='/' element={
         <ProtectedRoute>    <Home /></ProtectedRoute>
     
-        
-        
+
         } />
       <Route path='/login' element={<Login />
  } />
