@@ -15,11 +15,14 @@ import Tours from './Components/Tours/Tours.jsx'
 import ProtectedRoute from './protectedroute.jsx'
 import TopDestinations from './Components/TopDestinations/TopDestinations.jsx'
 
-
+import { ToastContainer } from "react-toastify";
+import Payment from './Components/payment/payment.jsx'
+import Cart from './Components/bookingCart/bookingCart.jsx'
 function App() {
 
   return (
     <>
+      <ToastContainer position="top-right" autoClose={3000} />
     <BrowserRouter>
     <NavBar />
     <Routes>
@@ -40,6 +43,8 @@ function App() {
       <Route path='/TourCard/:id' element={  <ProtectedRoute><TourCard />  </ProtectedRoute>} />
       <Route path='/TopDestinations' element={  <ProtectedRoute><TopDestinations />  </ProtectedRoute>} />
       <Route path='/Tours' element={ <ProtectedRoute><Tours />  </ProtectedRoute>} /> 
+      <Route path='/TourDetails/payment/' element={ <ProtectedRoute><Payment />  </ProtectedRoute>} /> 
+      <Route path='/cart/' element={ <ProtectedRoute><Cart />  </ProtectedRoute>} /> 
       {/* <Route path='/DestinationGuide' element={ <Desti><Tours />  </ProtectedRoute>} />  */}
       <Route path="*" element={<div>Not Found</div>} />
 

@@ -32,7 +32,9 @@ const {currentTrip}=useSelector((state)=>state.trip)
   };
 
   return (
-    <div className="font-sans text-gray-800">
+ <>
+  {
+    currentTrip ?    <div className="font-sans text-gray-800">
 
 
 
@@ -151,65 +153,16 @@ const {currentTrip}=useSelector((state)=>state.trip)
       </div>
 
      
-      <div className="bg-gray-100 p-6 rounded shadow-md max-w-xl mx-auto">
-        <h3 className="text-lg font-semibold mb-4">Total price</h3>
-        <div className="flex items-center gap-2 mb-6">
-          <span className="text-red-600 font-medium">$ {currentTrip.price}</span>
-          <span className="text-green-500 text-xl">✔</span>
-        </div>
-
-        <div className="flex flex-col gap-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Dates</label>
-            <input
-              type="date"
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-            />
-          </div>
-
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <label className="block text-sm font-medium mb-1">Adults</label>
-              <input
-                type="number"
-                min="1"
-                defaultValue="1"
-                className="w-full border border-gray-300 rounded px-3 py-2"
-              />
-            </div>
-            <div className="flex-1">
-              <label className="block text-sm font-medium mb-1">
-                Child (Age: 2-5.99)
-              </label>
-              <select className="w-full border border-gray-300 rounded px-3 py-2">
-                {[...Array(6).keys()].map((n) => (
-                  <option key={n}>{n}</option>
-                ))}
-              </select>
-            </div>{
-            }
-            <div className="flex-1">
-              <label className="block text-sm font-medium mb-1">
-                Child (Age: 6-11.99)
-              </label>
-              <select className="w-full border border-gray-300 rounded px-3 py-2">
-                {[...Array(6).keys()].map((n) => (
-                  <option key={n}>{n}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-            <Link 
+   
+      
+      </div>
+    </div>
+ <Link 
             className="mt-6 w-[70%] ml-20 text-center bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
             to={`/TourDetails/${currentTrip.tripId}/Personal_Information`}
             >
             Proceed to Booking
             </Link>
-        </div>
-      </div></div>
-    </div>
-
 <div className="px-4 md:px-20 py-8 text-gray-800 max-w-4xl">
   <h2 className="text-2xl font-serif font-semibold mb-6">Tour description</h2>
   <p className="mb-4 font-light leading-relaxed">
@@ -273,6 +226,7 @@ const {currentTrip}=useSelector((state)=>state.trip)
 </div>
 
 
-    </div>
+    </div>:<div>loading</div>
+  }</>
   );
 }

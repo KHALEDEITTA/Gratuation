@@ -8,8 +8,9 @@ export const fetchAllTrips = createAsyncThunk('trips/fetchAll', async () => {
 });
 
 export const fetchOneTrip = createAsyncThunk('trips/fetchOne', async (id) => {
-  const res = await axiosInstance.get(`/trips/${id}`);
-  return res.data.data;
+  const  res = await axiosInstance.get(`/trips/${id}`);
+  console.log(res.data.data)
+  return await res.data.data;
 });
 
 export const addTrip = createAsyncThunk('trips/add', async (tripData) => {
