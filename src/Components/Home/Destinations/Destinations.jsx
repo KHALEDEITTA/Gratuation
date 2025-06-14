@@ -67,7 +67,9 @@ import image_5 from '../../../Assets/destination5.png'
 import image_6 from '../../../Assets/mrsa_mtrwh_4a2989af89.webp'
 import image_7 from '../../../Assets/Home_2.jpg'
 import { Link } from "react-router";
-const destinations = [
+import { useDispatch, useSelector } from "react-redux";
+import { fetchalldestination } from "../../../store/destinationslic";
+const destination = [
   {
     image: image_1,
     title: "Aswan",
@@ -109,6 +111,15 @@ const destinations = [
 export default function Destinations() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollRef = useRef(null);
+  
+
+  const dispatch=useDispatch()
+  useEffect(()=>{
+    dispatch(fetchalldestination())
+    
+  },[])
+  const {list}=useSelector((state)=>state.destinations)
+
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -136,12 +147,12 @@ export default function Destinations() {
 
   const goToPrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? destinations.length - 1 : prevIndex - 1
+      prevIndex === 0 ? destination.length - 1 : prevIndex - 1
     );
   };
 
   const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % destinations.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % destination.length);
   };
 
   return (
@@ -183,10 +194,12 @@ export default function Destinations() {
           ref={scrollRef}
           style={{
             transform: `translateX(-${currentIndex * 20}%)`,
-            width: `${destinations.length * 9}%`,
+            width: `${destination.length * 9}%`,
           }}
         ><div className=' flex gap-5 mx-14 mt-8'>
-          {[...destinations].map((dest, index) => (
+          {[...destination].map((dest, index) => (
+            
+            <Link to={`/TourCard/${list.destinationId}`}>
             
             <div key={index} className={`relative rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:shadow-o transition-shadow duration-300 group w-[320px] h-[340px]`}>
       <img
@@ -207,7 +220,7 @@ export default function Destinations() {
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-lg opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-opacity duration-300">
         {dest.tours} 
       </div>
-    </div>
+    </div></Link>
           ))}</div>
         </div>
       </div>
