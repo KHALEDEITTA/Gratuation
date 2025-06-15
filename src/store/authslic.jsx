@@ -27,7 +27,8 @@ export const loginUser = createAsyncThunk(
   async (form , thunkAPI) => {
     try {
     const res =  await axios.post('http://localhost:8080/favtour/auth/login', form);
-      localStorage.setItem('token', res.data.data.token);
+      sessionStorage.setItem('token', res.data.data.token);
+      sessionStorage.setItem('user', res.data.data.username);
       console.log(res.data)
 
       // localStorage.setItem('refreshToken', res.data.refreshToken);
@@ -44,10 +45,10 @@ export const loginUser = createAsyncThunk(
 
 const initialState = {
   user: null,
-  token: localStorage.getItem('token') || null,
+  token: sessionStorage.getItem('token') || null,
   loading: false,
   error: null,
-  isAuthenticated: !!localStorage.getItem('token'),
+  isAuthenticated: !!sessionStorage.getItem('token'),
 };
 
 const authSlice = createSlice({
@@ -58,11 +59,11 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
-      localStorage.clear();
+      sessionStorage.clear();
     },
     setToken: (state, action) => {
       state.token = action.payload;
-      localStorage.setItem('token', action.payload);
+      sessionStorage.setItem('token', action.payload);
       state.isAuthenticated = true;
     },
   },
@@ -74,7 +75,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
+        state.user = action.payload.data.username;
         state.token = action.payload.token;
         state.isAuthenticated = true;
       })

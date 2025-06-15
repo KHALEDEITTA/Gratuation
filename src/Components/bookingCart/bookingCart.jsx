@@ -1,101 +1,107 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { clearCart, decrease, deleteCart, increase } from "../features/counter/CartSlice";
+
 
 import { Link } from "react-router-dom";
+import { bookingCancle, bookingUser, bookTrip } from "../../store/booking/bookingslic";
 
 
 export default function Cart() {
-    const carts = useSelector((state) => state.Cart);
+   
     const dispatch = useDispatch();
+useEffect(()=>{
 
-    const totalPrice = carts.reduce((acc, cart) => {
-        acc += ( cart.price ) * (cart.quantity);
-        return acc;
-    }, 0);
+dispatch(bookingUser())
 
-    const totalQuantity = carts.reduce((acc, cart) => {
-        acc +=  cart.quantity ;
-        return acc;
-    }, 0);
+},[dispatch])
+const {list}=useSelector((state)=>state.booking)
+  const onCancell= async(id)=>{
+ await    dispatch(bookingCancle({userid:id}))
+    await dispatch(bookingUser())
+  }
 
     return (
         <>
-            <div className="pt-5" >
+            <div className="pt-5 " >
                 <h3 className="text-gray-700 text-4xl font-inter font-bold tracking-normal leading-none pl-5 ">product in card</h3>
             </div>
-            {carts.length > 0 ? (
+            {list.length > 0 ? (
                 <div className="mt-5 py-5 container mx-auto">
                     <table className="table-auto w-full border-separate border-spacing-2">
                         <thead>
                             <tr>
                                 <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">#</th>
-                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">Product</th>
-                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">Brand</th>
-                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">Unit Price</th>
-                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">Quantity</th>
-                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">Total Price</th>
+                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">image</th>
+                                                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">name</th>
+                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">tripDate</th>
+                                 <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">BookingDate</th>
+                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">Total Price </th>
+
+                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">payment </th>
                                 <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {carts.map((cart) => (
-                                <tr key={cart.id} className="hover:bg-gray-100">
-                                    <td className="text-center py-2">{}</td>
+                            {list.map((book,index) => (
+                                <tr key={book.bookingId} className="hover:bg-gray-100">
+                                    <td className="text-center py-2">{1+index}</td>
                                     <td className="py-2 px-4">
-                                        <img src={cart.img} alt={cart.name} className="w-16 h-16 object-cover rounded-lg shadow-md" />
+                                        <img src={book.tripCoverPhoto} alt={book.tripLabel} className="w-16 h-16 object-cover rounded-lg shadow-md" />
                                     </td>
-                                    <td className="py-2 px-4">{cart.type}</td>
-                                    <td className="py-2 px-4">{cart.price} $</td>
-                                    <td className="py-2 px-4 flex items-center justify-center space-x-2">
-                                        <button
-                                            className="text-black text-2xl  px-2 py-1 rounded-full hover:scale-150"
-                                            // onClick={() => dispatch(decrease(cart))}
-                                        >
-                                            -
-                                        </button>
-                                        <div className="text-center font-semibold">{cart.quantity}</div>
-                                        <button
-                                            className=" text-black text-2xl  px-2 py-1 rounded-full hover:scale-150"
-                                            // onClick={() => dispatch(increase(cart))}
-                                        >
-                                            +
-                                        </button>
+                                      <td className="py-2 px-4 flex items-center justify-center space-x-2">
+                                      
+                                        <div className="text-center font-semibold max-w-[200px]">{book.tripLabel}</div>
+                                       
                                     </td>
-                                    <td className="py-2 px-4">{(cart.price) * (cart.quantity)} $</td>
+                                    <td className="py-2 px-4">{book.tripDate}</td>
+                                          <td className="py-2 px-4">{book.createdAt}</td>
+                                    <td className="py-2 px-4">{book.totalPrice} $</td>
+                                  
+                                    <td className="py-2 px-4">{ book.bookingStatus==="APPROVED" ?
+                                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold  bg-green-100 text-green-700`}>
+      <span className="mr-1">✅</span> conformed
+    </span>
+
+                       
+: book.bookingStatus==="PENDING" ?
+            
+           
+                                      <span className={`inline-flex items-center px-3 py-2 rounded-xl text-sm font-semibold bg-yellow-600 text-white`}>
+      <span className="mr-1">⏳</span> pending
+    </span>                 :              <span className={`inline-flex items-center px-3 py-2 rounded-xl text-sm font-semibold bg-red-700 text-white`}>
+      <span className="mr-1">❌ </span> cancelled
+    </span>                 
+                                        
+                                        }
+                                        
+                                        
+                                        
+                                         </td>
                                     <td className="py-2 px-4">
-                                        <button
+                                        {
+                                            book.bookingStatus==='CANCELLED'?
+                                             <button 
+                                             disabled
+                                            className="bg-gray-500 text-white px-6 py-2 rounded-lg"
+                                          
+                                        >
+                                            canceled
+                                        </button>:
+                                         <button
                                             className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-700"
-                                            // onClick={() => dispatch(deleteCart(cart))}
+                                            onClick={() =>onCancell(book.bookingId)}
                                         >
-                                            Delet
+                                            cancel
                                         </button>
+
+                                        }
+                                       
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
 
-                    <div className="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <div className="text-xl font-semibold text-sky-900">
-                            <h2>Total Price: {totalPrice.toFixed(2)} $</h2>
-                            <h2>Total quantity: {totalQuantity}</h2>
-                        </div>
-                        <div className="flex gap-4">
-                            <button
-                                type="button"
-                                className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600"
-                                // onClick={() => dispatch(clearCart())}
-                            >
-                                Clear Cart
-                            </button>
-                            <button
-                                type="button"
-                                className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600"
-                            >
-                                Buy Now
-                            </button>
-                        </div>
-                    </div>
                 </div>
             ) : (
                 <div className="container mx-auto flex flex-col items-center justify-center py-10">

@@ -5,14 +5,11 @@ import { useNavigate, useParams } from 'react-router';
 import { payForBooking } from '../../store/payment/paymentslic';
 import { toast } from 'react-toastify';
 const bookingId=sessionStorage.getItem('bookingId')
-
 const Payment = () => {
-    // const {bookingId}=useParams()
     const dispatch=useDispatch()
     const navigate=useNavigate()
     const onClick=()=>{
 dispatch(payForBooking({bookingId}))
-// navigate('/')
 toast.success('your payment is success')
 navigate('/')
     }

@@ -67,6 +67,8 @@ import image_5 from '../../../Assets/destination5.png'
 import image_6 from '../../../Assets/mrsa_mtrwh_4a2989af89.webp'
 import image_7 from '../../../Assets/Home_2.jpg'
 import { Link } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchalldestination } from "../../../store/destinationslic";
 const destinations = [
   {
     image: image_1,
@@ -132,7 +134,9 @@ export default function Destinations() {
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
-
+const dispatch=useDispatch()
+useEffect(()=>{dispatch(fetchalldestination())},[])
+const {list}=useSelector((state)=>state.destinations)
 
   const goToPrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -186,12 +190,14 @@ export default function Destinations() {
             width: `${destinations.length * 9}%`,
           }}
         ><div className=' flex gap-5 mx-14 mt-8'>
-          {[...destinations].map((dest, index) => (
+          {[...list].map((dest, index) => (
             
-            <div key={index} className={`relative rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:shadow-o transition-shadow duration-300 group w-[320px] h-[340px]`}>
+    <Link to={`/TourCard/${dest.destinationId}`}> 
+        
+        <div key={index} className={`relative rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:shadow-o transition-shadow duration-300 group w-[320px] h-[340px]`}>
       <img
-        src={dest.image}
-        alt={dest.title}
+        src={dest.coverPhoto||image_1}
+        alt={dest.destinationName}
         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
       />
       <div > 
@@ -201,14 +207,18 @@ export default function Destinations() {
       <div className="absolute inset-0 bg-black bg-opacity-5 group-hover:bg-opacity-10 transition duration-300" />
 
       <div className="absolute w-full text-center bottom-10 left-1/2 -translate-x-1/2 text-white text-3xl font-semibold group-hover:-translate-y-4 transition duration-300 mb-2">
-        {dest.title}
+        {dest.destinationName}
       </div>
 
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-lg opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-opacity duration-300">
-        {dest.tours} 
+        {dest.numberOfTrips} 
       </div>
     </div>
-          ))}</div>
+    </Link>
+          )
+          
+          
+          )}</div>
         </div>
       </div>
     </div>
