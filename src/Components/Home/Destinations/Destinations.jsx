@@ -60,66 +60,57 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import image_1 from '../../../Assets/destination1.png' 
-import image_2 from '../../../Assets/destination3.jpg'
-import image_3 from '../../../Assets/destination4.jpg'
-import image_4 from '../../../Assets/destination2.png'
-import image_5 from '../../../Assets/destination5.png'
-import image_6 from '../../../Assets/mrsa_mtrwh_4a2989af89.webp'
-import image_7 from '../../../Assets/Home_2.jpg'
+// import image_2 from '../../../Assets/destination3.jpg'
+// import image_3 from '../../../Assets/destination4.jpg'
+// import image_4 from '../../../Assets/destination2.png'
+// import image_5 from '../../../Assets/destination5.png'
+// import image_6 from '../../../Assets/mrsa_mtrwh_4a2989af89.webp'
+// import image_7 from '../../../Assets/Home_2.jpg'
 import { Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchalldestination } from "../../../store/destinationslic";
-const destination = [
-  {
-    image: image_1,
-    title: "Aswan",
-    tours: "5 Tours"
-  },
-  {
-    title: "Cairo",
-    image: image_2,
-    tours: "7 Tours",
-  },
-  {
-    title: "Hurghada",
-    image: image_3,
-    tours:"9 Tours",
-  },
-  {
-  image: image_4,
-  title: "Luxor",
-  tours: "10 Tours"
-  },
-  {
-    title: "Marsa Alam",
-    image: image_5,
-    tours: "11 Tours",
-  },
+// const destinations = [
+//   {
+//     image: image_1,
+//     title: "Aswan",
+//     tours: "5 Tours"
+//   },
+//   {
+//     title: "Cairo",
+//     image: image_2,
+//     tours: "7 Tours",
+//   },
+//   {
+//     title: "Hurghada",
+//     image: image_3,
+//     tours:"9 Tours",
+//   },
+//   {
+//   image: image_4,
+//   title: "Luxor",
+//   tours: "10 Tours"
+//   },
+//   {
+//     title: "Marsa Alam",
+//     image: image_5,
+//     tours: "11 Tours",
+//   },
   
-  {
-    title: "Mersa Matruh",
-    image:image_6,
-    tours: "6 Tours",
-  },
-  {
-    title: "Sharm El-Sheikh",
-    image:image_7,
-    tours: "19 Tours",
-  },
-];
+//   {
+//     title: "Mersa Matruh",
+//     image:image_6,
+//     tours: "6 Tours",
+//   },
+//   {
+//     title: "Sharm El-Sheikh",
+//     image:image_7,
+//     tours: "19 Tours",
+//   },
+// ];
 
 export default function Destinations() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollRef = useRef(null);
-  
-
-  const dispatch=useDispatch()
-  useEffect(()=>{
-    dispatch(fetchalldestination())
-    
-  },[])
-  const {list}=useSelector((state)=>state.destinations)
-
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -143,16 +134,18 @@ export default function Destinations() {
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
-
+const dispatch=useDispatch()
+useEffect(()=>{dispatch(fetchalldestination())},[])
+const {list}=useSelector((state)=>state.destinations)
 
   const goToPrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? destination.length - 1 : prevIndex - 1
+      prevIndex === 0 ? list.length - 1 : prevIndex - 1
     );
   };
 
   const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % destination.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % list.length);
   };
 
   return (
@@ -194,17 +187,17 @@ export default function Destinations() {
           ref={scrollRef}
           style={{
             transform: `translateX(-${currentIndex * 20}%)`,
-            width: `${destination.length * 9}%`,
+            width: `${list.length * 9}%`,
           }}
         ><div className=' flex gap-5 mx-14 mt-8'>
-          {[...destination].map((dest, index) => (
+          {[...list].map((dest, index) => (
             
-            <Link to={`/TourCard/${list.destinationId}`}>
-            
-            <div key={index} className={`relative rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:shadow-o transition-shadow duration-300 group w-[320px] h-[340px]`}>
+    <Link to={`/TourCard/${dest.destinationId}`}> 
+        
+        <div key={index} className={`relative rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:shadow-o transition-shadow duration-300 group w-[320px] h-[340px]`}>
       <img
-        src={dest.image}
-        alt={dest.title}
+        src={dest.coverPhoto||image_1}
+        alt={dest.destinationName}
         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
       />
       <div > 
@@ -214,14 +207,18 @@ export default function Destinations() {
       <div className="absolute inset-0 bg-black bg-opacity-5 group-hover:bg-opacity-10 transition duration-300" />
 
       <div className="absolute w-full text-center bottom-10 left-1/2 -translate-x-1/2 text-white text-3xl font-semibold group-hover:-translate-y-4 transition duration-300 mb-2">
-        {dest.title}
+        {dest.destinationName}
       </div>
 
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-lg opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-opacity duration-300">
-        {dest.tours} 
+        {dest.numberOfTrips} 
       </div>
-    </div></Link>
-          ))}</div>
+    </div>
+    </Link>
+          )
+          
+          
+          )}</div>
         </div>
       </div>
     </div>

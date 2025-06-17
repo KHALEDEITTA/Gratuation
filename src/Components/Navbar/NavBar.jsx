@@ -14,7 +14,7 @@ export default function NavBar() {
    const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
   
     const [isOpen, setIsOpen] = useState(false);
-
+const user=sessionStorage.getItem('user')
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 const dispatch=useDispatch()
   
@@ -26,7 +26,6 @@ const dispatch=useDispatch()
 };
 // const token =localStorage.getItem('token')
 // const user =localStorage.getItem('username')
-const {token,user}=useSelector((state)=>state.auth)
 const handleLogin = () => setIsLoggedIn(true);
   // const handleLogout = () => setIsLoggedIn(false);
 
@@ -80,7 +79,7 @@ const handleLogin = () => setIsLoggedIn(true);
             </li>
 
           <li className="cursor-pointer transition">
-            <Link className='no-underline text-white font-serif hover:text-red-600'>Booking</Link>
+            <Link      to={'/cart'} className='no-underline text-white font-serif hover:text-red-600'>Booking</Link>
             </li>
             {console.log(user)}
         </ul>

@@ -42,7 +42,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-gray-300 px-8 py-10">
+    <footer className="bg-black text-gray-300 px-8 py-10 mt-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Our Services */}
         <div>
