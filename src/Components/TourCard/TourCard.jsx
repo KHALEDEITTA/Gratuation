@@ -75,7 +75,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchonedestination } from '../../store/destinationslic';
 
 const TourCard = ({ tour }) => (
- <Link to={`/TourDetails/${tour.tripId}`}> <div className="bg-white rounded-2xl shadow-sm hover:shadow-2xl p-4 w-full md:w-[300px] h-[390px]">
+ <Link to={`/TourDetails/${tour.tripId}`}> <div className="bg-white rounded-2xl shadow-sm hover:shadow-2xl p-4 hover:text-red-600 w-full md:w-[300px] h-[390px]">
     <img src={tour.coverImage || img1} alt={tour.label} className="rounded-2xl mb-3 h-[180px] w-full object-cover" />
     <h3 className="mb-1.5">{tour.label}</h3>
 
@@ -186,7 +186,7 @@ const {listForOne,desinationName}=useSelector((state)=>state.destinations)
 
       <div className="p-10 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-10 ml-6">
 
-        <aside className="space-y-6 border p-5 rounded-2xl shadow-sm h-1/2">
+        <aside className="space-y-6 border p-5 rounded-2xl shadow-sm h-[600px]">
           <input
             type="text"
             placeholder="Search..."

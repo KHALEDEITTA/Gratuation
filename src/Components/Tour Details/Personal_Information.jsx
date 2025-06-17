@@ -107,7 +107,7 @@ dispatch(bookTrip({ tripId:currentTrip.tripId, bookingData:dataForm }))
 }
 useEffect(()=>{
 
-  console.log('jjj')
+  // console.log('jjj')
 },[status])
   return (
  <> {
@@ -179,13 +179,32 @@ useEffect(()=>{
             options={["Select country", "Egypt", "USA", "Germany"]}
         />
         <SelectField
+        setItem={setadult}
+        
+            label="Adults"
+            options={[1, 2, 3, 4,5]}
+        />
+        <SelectField
+        setItem={setchild}
+            label="Childs"
+            options={[0 ,1 ,2 ,3 ,4 ]}
+        />
+        <SelectField
         setItem={setGuideLanguage}
             label="Guide Language"
+            
             options={["Select", "English", "Arabic", "French"]}
+        />
+        <InputField
+          label="Date"
+          placeholder="select a date"
+          type="date"
+          setItem={setBookingDate}
         />
         <div className="md:col-span-2">
             <InputField label="Special Requirements" textarea    setItem={setSpecialRequirements}/>
         </div>
+        
         <div  >
             <div 
             className="mt-2 cursor-pointer w-[100%] ml-20 text-center flex justify-center items-center bg-red-600 text-white py-2 px-8 rounded hover:bg-red-700 transition"
@@ -201,7 +220,7 @@ useEffect(()=>{
         
     </div>
 
-    <div className="w-full h-full py-10 md:w-1/3 bg-gray-100 mt-8  p-4 rounded-xl shadow">
+    <div className="w-full h-full py-5 md:w-1/3 bg-gray-100 mt-8  px-4 rounded-xl shadow">
         <h3 className="text-lg font-semibold mb-4">Your Order</h3>
         <div className="bg-white p-4 rounded-lg shadow">
             <div className="flex gap-4 mb-4">
@@ -230,14 +249,14 @@ useEffect(()=>{
             {/* <span>Total payment</span>
             <span>${currentTrip.price}</span> */}
         </div>
-           <div className="bg-gray-100 p-6 rounded shadow-md max-w-xl mx-auto">
-                <h3 className="text-lg font-semibold mb-4">Total price</h3>
-                <div className="flex items-center gap-2 mb-6">
-                  <span className="text-red-600 font-medium">$ {totalprice}</span>
-                  <span className="text-green-500 text-xl">✔</span>
+           <div className="bg-gray-100 py-3 rounded shadow-md text-center max-w-xl mx-auto">
+                <h3 className="text-xl font-semibold mb-4">Total price</h3>
+                <div className="gap-2 mb-6">
+                  <p className="text-red-600 text-lg font-semibold  ">$ {totalprice}</p>
+                  
                 </div>
         
-                <div className="flex flex-col gap-4">
+                {/* <div className="flex flex-col gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Dates</label>
                     <input
@@ -275,7 +294,7 @@ useEffect(()=>{
                   </div>
         
                    
-                </div>
+                </div> */}
               </div>
               
               
