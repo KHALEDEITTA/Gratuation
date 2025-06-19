@@ -3,6 +3,7 @@ import authSlice from './authslic';
 import destinationtSlice from './destinationslic';
 import tripslic from './trip/tripslic';
 import bookingSlice from './booking/bookingslic';
+import branchSlice from './branch/branchslic';
 import paymentSlice from './payment/paymentslic';
 
 export const store = configureStore({
@@ -11,7 +12,8 @@ export const store = configureStore({
     destinations:destinationtSlice,
     trip:tripslic,
     booking:bookingSlice,
-    payment:paymentSlice
+    payment:paymentSlice,
+    branch:branchSlice
    
   },
 });

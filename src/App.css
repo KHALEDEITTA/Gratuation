@@ -70,3 +70,18 @@
       background-image: url(./Assets/foot.jpg);
       
     }
+    /* ✅ تصغير حجم الأسهم */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 20px !important;
+  height: 20px !important;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  color: white;
+}
+
+/* ✅ تصغير أيقونة السهم نفسه */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 12px !important;
+}

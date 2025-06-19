@@ -19,6 +19,7 @@ import { ToastContainer } from "react-toastify";
 import Payment from './Components/payment/payment.jsx'
 import Cart from './Components/bookingCart/bookingCart.jsx'
 import 'aos/dist/aos.css';
+import TravcoPage from './Components/tour/tour.jsx'
 function App() {
   
 
@@ -45,6 +46,7 @@ function App() {
       <Route path='/TopDestinations' element={  <ProtectedRoute><TopDestinations />  </ProtectedRoute>} />
       <Route path='/Tours' element={ <ProtectedRoute><Tours />  </ProtectedRoute>} /> 
       <Route path='/TourDetails/payment/' element={ <ProtectedRoute><Payment />  </ProtectedRoute>} /> 
+      <Route path='/Tours/' element={ <ProtectedRoute><TravcoPage />  </ProtectedRoute>} /> 
       <Route path='/cart/' element={ <ProtectedRoute><Cart />  </ProtectedRoute>} /> 
       {/* <Route path='/DestinationGuide' element={ <Desti><Tours />  </ProtectedRoute>} />  */}
       <Route path="*" element={<div>Not Found</div>} />
