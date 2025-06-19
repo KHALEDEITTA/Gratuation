@@ -20,6 +20,7 @@ import Payment from './Components/payment/payment.jsx'
 import Cart from './Components/bookingCart/bookingCart.jsx'
 import 'aos/dist/aos.css';
 import TravcoPage from './Components/tour/tour.jsx'
+import NileCruises from './Components/Nile Cruises/Nile_Cruises.jsx'
 function App() {
   
 
@@ -50,6 +51,7 @@ function App() {
       <Route path='/cart/' element={ <ProtectedRoute><Cart />  </ProtectedRoute>} /> 
       {/* <Route path='/DestinationGuide' element={ <Desti><Tours />  </ProtectedRoute>} />  */}
       <Route path="*" element={<div>Not Found</div>} />
+      <Route path="/NileCruises" element={<NileCruises />} />
 
     </Routes>
     <Footer />
