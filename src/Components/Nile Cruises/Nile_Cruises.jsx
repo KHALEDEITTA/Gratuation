@@ -3,9 +3,12 @@ import img1 from '../../Assets/destination5.png';
 import { Link, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchonedestination } from '../../store/destinationslic';
+import { fetchAllNileCruises, filterNileCruisesByItinerary } from '../../store/nile_Curises/Nile_Cruisesslic';
+import { fetchAllItineraries } from '../../store/iteriations/iterationslic';
+import { all } from 'axios';
 
 const TourNile = ({ tour }) => (
- <Link to={`/TourDetails/${tour.tripId}`}> <div className="bg-white rounded-2xl shadow-sm hover:shadow-2xl p-4 hover:text-red-600 w-full md:w-[300px] h-[390px]">
+ <Link to={`/TourDetails/${tour.id}`}> <div className="bg-white rounded-2xl shadow-sm hover:shadow-2xl p-4 hover:text-red-600 w-full md:w-[300px] h-[390px]">
     <img src={tour.coverImage || img1} alt={tour.label} className="rounded-2xl mb-3 h-[180px] w-full object-cover" />
     <h3 className="mb-1.5">{tour.label}</h3>
 
@@ -14,9 +17,9 @@ const TourNile = ({ tour }) => (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className=" lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
         <span className='mt-1'>{tour.location || "Aswan"}</span>
         </span>
-      <span className='flex gap-2 mt-2'>
+      {/* <span className='flex gap-2 mt-2'>
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-clock-icon lucide-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span>{tour.duration}</span></span>
+        <span>{tour.duration}</span></span> */}
     </div>
 
     <p className=" flex flex-col">
@@ -74,10 +77,11 @@ function InputField({ label,setItem, type = "text", textarea = false ,placeholde
   }
 
 const NileCruises = () => {
-  const param=useParams()
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedDurations, setSelectedDurations] = useState([]);
+  const [selecteditieration, setitieration] = useState('All');
 //   const [selectedGroupSizes, setSelectedGroupSizes] = useState([]);
     const [bookingDate, setBookingDate] = useState("");
     const [child, setchild] = useState(0);
@@ -85,18 +89,20 @@ const NileCruises = () => {
 
   const dispatch=useDispatch()
   useEffect(()=>{
-dispatch(fetchonedestination(param.id))
+ if(selecteditieration==="All"){
+    dispatch(fetchAllNileCruises())
+  }
+  else
+  dispatch(filterNileCruisesByItinerary(selecteditieration))
 
-  },[])
+
+
+
+  },[selecteditieration])
   const [sortOrder, setSortOrder] = useState("none");
-const {listForOne,desinationName}=useSelector((state)=>state.destinations)
-  const handleCheckboxChange = (value, setState) => {
-    setState(prev =>
-      prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]
-    );
+const {list}=useSelector((state)=>state.Cruises)
 
-  };
-  const filteredTours = listForOne
+  const filteredTours = list
     .filter(tour => {
         const matchesSearch = tour.label.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesType = selectedTypes.length ? selectedTypes.includes(tour.tripType) : true;
@@ -114,7 +120,7 @@ const {listForOne,desinationName}=useSelector((state)=>state.destinations)
     <div className="font-serif">
       <div className="relative h-96 bg-cover bg-center bgnile" >
         <div className="absolute inset-0 bg-black bg-opacity-15 flex flex-col justify-center items-start">
-          <h1 className="text-4xl md:text-5xl text-white font-semibold mt-5 ml-12">{desinationName}</h1>
+          <h1 className="text-4xl md:text-5xl text-white font-semibold mt-5 ml-12">{'khh'}</h1>
         </div>
       </div>
 
@@ -143,6 +149,11 @@ const {listForOne,desinationName}=useSelector((state)=>state.destinations)
         <hr className='' />
                       {/* {console.log(listForOne)} */}
         <form className="grid grid-cols-1 gap-6">
+           <SelectField
+        setItem={setitieration}
+            label="Itinerary"
+            options={["All","7 Nights - Luxor / Aswan / Luxor","4 Nights - Luxor / Aswan","3 Nights - Aswan / Luxor"]}
+        />
             <SelectField
         setItem={setadult}
         
@@ -162,6 +173,7 @@ const {listForOne,desinationName}=useSelector((state)=>state.destinations)
           setItem={setBookingDate}
         />
         </form>
+      
         
         </aside>
 
@@ -169,7 +181,11 @@ const {listForOne,desinationName}=useSelector((state)=>state.destinations)
         <section>
           <div className="flex flex-wrap gap-6">
             {
-                filteredTours.map(tour => <TourNile key={tour.id} tour={tour} />)
+                filteredTours.map(tour => 
+                
+             <Link to={`/NileCruises/${tour.id}`}>   <TourNile key={tour.id} tour={tour} /></Link>
+              
+              )
             }
           </div>
         </section>

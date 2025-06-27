@@ -21,6 +21,7 @@ import Cart from './Components/bookingCart/bookingCart.jsx'
 import 'aos/dist/aos.css';
 import TravcoPage from './Components/tour/tour.jsx'
 import NileCruises from './Components/Nile Cruises/Nile_Cruises.jsx'
+import TourNile from './Components/TourNile/TourNile.jsx'
 function App() {
   
 
@@ -47,11 +48,13 @@ function App() {
       <Route path='/TopDestinations' element={  <ProtectedRoute><TopDestinations />  </ProtectedRoute>} />
       <Route path='/Tours' element={ <ProtectedRoute><Tours />  </ProtectedRoute>} /> 
       <Route path='/TourDetails/payment/' element={ <ProtectedRoute><Payment />  </ProtectedRoute>} /> 
-      <Route path='/Tours/' element={ <ProtectedRoute><TravcoPage />  </ProtectedRoute>} /> 
+      <Route path='/Tourss/' element={ <ProtectedRoute><TravcoPage />  </ProtectedRoute>} /> 
       <Route path='/cart/' element={ <ProtectedRoute><Cart />  </ProtectedRoute>} /> 
       {/* <Route path='/DestinationGuide' element={ <Desti><Tours />  </ProtectedRoute>} />  */}
       <Route path="*" element={<div>Not Found</div>} />
       <Route path="/NileCruises" element={<NileCruises />} />
+      <Route path="/Hotel" element={<Hotel />} />
+      <Route path="/NileCruises/:id" element={<TourNile />} />
 
     </Routes>
     <Footer />

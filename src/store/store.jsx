@@ -5,6 +5,10 @@ import tripslic from './trip/tripslic';
 import bookingSlice from './booking/bookingslic';
 import branchSlice from './branch/branchslic';
 import paymentSlice from './payment/paymentslic';
+import nileCruiseSlice from './nile_Curises/Nile_Cruisesslic';
+import itinerarySlice from './iteriations/iterationslic';
+import hotelSlice from './hotel/hotelslic';
+
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +17,10 @@ export const store = configureStore({
     trip:tripslic,
     booking:bookingSlice,
     payment:paymentSlice,
-    branch:branchSlice
+    branch:branchSlice,
+    Cruises:nileCruiseSlice,
+    iteration:itinerarySlice,
+    Hotel:hotelSlice
    
   },
 });

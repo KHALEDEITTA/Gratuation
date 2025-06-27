@@ -1,14 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import header from '../../Assets/ciudad-maderas-MXbM1NrRqtI-unsplash.jpg'
 import { FaMapMarkerAlt, FaCalendarAlt, FaHome, FaUser } from "react-icons/fa";
+import Rooms from './Choose_Room/Rooms';
+import Personal_Hotel from './Personal_Hotel/Personal_Hotel';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchalldestination } from '../../store/destinationslic';
+import { searchHotels } from '../../store/hotel/hotelslic';
 
 export default function Hotel() {
+
   const [destination, setDestination] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [rooms, setRooms] = useState(1);
+  const [page,setPage]=useState(1)
   const [guests, setGuests] = useState(2);
-  const [nationality, setNationality] = useState("");
+const dispatch=useDispatch()
+  useEffect(()=>{
+    dispatch(fetchalldestination())
+    
+  },[])
+  const OnSearch=()=>{
+    if( !destination){
+      return
+    }
+    dispatch(searchHotels({
+      destination:destination,
+      from:startDate,
+      to:endDate
+    }))
+    setPage(2)
+  }
+  const {list}=useSelector((state)=>state.destinations)
+  const {lists}=useSelector((state)=>state.Hotel)
   return (
     <>
       <div className="relative  h-[25rem] w-full">
@@ -18,10 +42,17 @@ export default function Hotel() {
             className="w-full h-full object-center"
           />  
       </div>
-
-      <div className='mt-16 px-28'>
+{
+  console.log(list)
+}
+{
+  console.log(lists)
+}
+{
+  page==1?
+  <div className='mt-16 px-28'>
       <div className="bg-white shadow-xl  rounded-xl drop-shadow-xl py-10 px-10  flex flex-wrap items-center justify-between gap-4">
-      {/* Destination */}
+
       <div className="flex flex-col">
         <label className="text-gray-600 mb-1">Destinations</label>
         <div className="flex items-center gap-2 border-b pb-1">
@@ -29,44 +60,47 @@ export default function Hotel() {
           <select
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
+          required 
             className="outline-none"
           >
             <option value="">Select Destination</option>
-            <option value="dubai">Dubai</option>
-            <option value="riyadh">Riyadh</option>
+           {
+            list?.map((item)=>(
+                          <option value={item.destinationName} >{item.destinationName} </option>
+            ))
+           }
           </select>
         </div>
       </div>
-
-      {/* Start Date */}
+{console.log(startDate)}
+     
       <div className="flex flex-col">
         <label className="text-gray-600 mb-1">Start Date</label>
         <div className="flex items-center gap-2 border-b pb-1">
           <FaCalendarAlt className="text-red-600" />
           <input
             type="date"
-            value={startDate}
+            defaultValue={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             className="outline-none"
           />
         </div>
       </div>
 
-      {/* End Date */}
+    
       <div className="flex flex-col">
         <label className="text-gray-600 mb-1">End Date</label>
         <div className="flex items-center gap-2 border-b pb-1">
           <FaCalendarAlt className="text-red-600" />
           <input
             type="date"
-            value={endDate}
+                defaultValue={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             className="outline-none"
           />
         </div>
       </div>
 
-      {/* Rooms */}
       <div className="flex flex-col">
         <label className="text-gray-600 mb-1">Rooms</label>
         <div className="flex items-center gap-2">
@@ -77,24 +111,9 @@ export default function Hotel() {
         </div>
       </div>
 
-      {/* Nationality */}
-      <div className="flex flex-col">
-        <label className="text-gray-600 mb-1">Nationality</label>
-        <div className="border-b pb-1">
-          <select
-            value={nationality}
-            onChange={(e) => setNationality(e.target.value)}
-            className="outline-none"
-          >
-            <option value="">Select</option>
-            <option value="saudi">Saudi</option>
-            <option value="egyptian">Egyptian</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Search Button */}
-      <button className="bg-red-600 text-white px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-red-700">
+   
+ 
+      <button   onClick={()=>{OnSearch()}} className="bg-red-600 text-white px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-red-700">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-4 w-4"
@@ -102,12 +121,21 @@ export default function Hotel() {
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
+
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M16.65 10.15a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" />
         </svg>
         Search
       </button>
     </div>
-      </div>
+      </div>: page==2?
+
+      
+      <Rooms startDate={startDate}
+      endDate={endDate} list={list} destination={destination}  lists={lists} setPage={setPage}/>:<Personal_Hotel/>
+}
+
+
+    
 
       <div className='text-left px-28 mt-16'>
         <p className='text-4xl text-center text-gray-800 mb-6'>Hotels</p>
