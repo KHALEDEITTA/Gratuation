@@ -76,8 +76,9 @@ import { fetchonedestination } from '../../store/destinationslic';
 
 const TourCard = ({ tour }) => (
  <Link to={`/TourDetails/${tour.tripId}`}> <div className="bg-white rounded-2xl shadow-sm hover:shadow-2xl p-4 hover:text-red-600 w-full md:w-[300px] h-[390px]">
-    <img src={tour.coverImage || img1} alt={tour.label} className="rounded-2xl mb-3 h-[180px] w-full object-cover" />
+    <img src={`http://localhost:8080/favtour/photos/trip/${tour.tripId}/${tour.coverImage}` } alt={tour.label} className="rounded-2xl mb-3 h-[180px] w-full object-cover" />
     <h3 className="mb-1.5">{tour.label}</h3>
+    {console.log(tour)}
 
     <div className="text-sm text-gray-600 flex items-center gap-5 mb-1.5">
       <span className='flex gap-2 mt-2'>

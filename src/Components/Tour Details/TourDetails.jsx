@@ -40,7 +40,7 @@ const {currentTrip}=useSelector((state)=>state.trip)
 
       <div className="relative h-[75vh]">
         <img
-          src={currentTrip.coverImage || img1}
+          src={`http://localhost:8080/favtour/photos/trip/${currentTrip.tripId}/${currentTrip.coverImage}`}
           alt="Khan El Khalili"
           className="w-full h-full object-cover"
         />
@@ -97,14 +97,14 @@ const {currentTrip}=useSelector((state)=>state.trip)
             </button>
           <div className="relative w-full md:w-2/4 h-[20%]">
             <img
-              src={images[currentIndex]}
+              src={`http://localhost:8080/favtour/photos/trip/${currentTrip.tripId}/${images[currentIndex]}`}
               alt="Main Tour"
               className="w-[100%] m-auto rounded-xl "
             />
             <div className="absolute bottom-4 right-4 bg-white px-3 py-1 text-sm shadow rounded">
               {currentIndex + 1} / {images.length}
             </div>
-            
+            {console.log(images[currentIndex])}
             
           </div>
             <button
@@ -120,7 +120,7 @@ const {currentTrip}=useSelector((state)=>state.trip)
             {images.map((src, i) => (
               <img
                 key={i}
-                src={src}
+                src={`http://localhost:8080/favtour/photos/trip/${currentTrip.tripId}/${src}`}
                 alt={`thumb-${i}`}
                 onClick={() => selectImage(i)}
                 className={`w-full h-28 object-cover rounded cursor-pointer border ${
