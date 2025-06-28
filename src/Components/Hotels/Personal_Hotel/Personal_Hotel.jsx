@@ -7,6 +7,7 @@ import img2 from '../../../Assets/d1.jpeg'
 import img3 from '../../../Assets/d1.jpeg'
 import img4 from '../../../Assets/d1.jpeg'
 import { Calendar, Users, Clock, MapPin, CheckCircle } from "lucide-react";
+import header from '../../../Assets/Banner-Hotel-Booking.jpg'
 
 
 export default function Personal_Hotel() {
@@ -36,7 +37,7 @@ const {currentTrip}=useSelector((state)=>state.trip)
   };
   return (
     <>
-    {/* <div className="relative  h-[25rem] w-full">
+    <div className="relative  h-[25rem] w-full">
         <img
         src={header}
         alt="About Background"
@@ -47,7 +48,7 @@ const {currentTrip}=useSelector((state)=>state.trip)
             <p className="text-white text-4xl ml-8 font-bold w-1/3">Gravity Hotel & Aqua Park Sahl Hasheesh</p>
         </div>
         
-    </div> */}
+    </div>
 
         <div className="flex items-center justify-center space-x-6 mt-10 ">
 
@@ -151,46 +152,19 @@ const {currentTrip}=useSelector((state)=>state.trip)
       </div>
     
 
-    <div className="bg-white py-10 px-4 md:px-20 text-gray-800">
+    <div className="bg-white py-10 px-4 md:px-20 text-gray-800 flex flex-col">
  
-      <h2 className="text-4xl font-serif mb-8 flex gap-4">
+      <h2 className="text-4xl font-serif mb-5 flex gap-4">
           <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="text-red-700 lucide lucide-book-text-icon lucide-book-text"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="M8 11h8"/><path d="M8 7h6"/></svg>       
-          Highlights
+          Hotel Overview
       </h2>
-
-      <div className="flex justify-center items-center"> <div className="grid grid-cols-2 md:grid-cols-4 gap-20 text-center text-sm mb-8">
-        <div className="flex flex-col items-center gap-3">
-          <span className="text-2xl text-black text-opacity-75 font-semibold">Location</span>
-          <span className="text-gray-500 text-lg flex gap-2"><MapPin className="text-red-600 w-8 h-8" /><span className="mt-1 font-semibold"> Location</span> </span>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-2xl text-black text-opacity-75 font-semibold">Duration</span>
-          <span className="text-gray-600 text-lg"></span>
-          <span className="text-gray-500 text-lg flex gap-2"><Clock className="text-red-600 w-8 h-8" /><span className="mt-1 font-semibold"> Duration</span> </span>
-        </div>
-
-        <div className="flex flex-col items-center gap-3">
-          <span className="text-2xl text-black text-opacity-75 font-semibold">Run</span>
-          <span className="text-gray-500 text-lg flex gap-2"><Calendar className="text-red-600 w-8 h-8" /><span className="mt-1 font-semibold"> Run</span> </span>
-        </div>
-
-        <div className="flex flex-col items-center gap-3">
-          <span className="text-2xl text-black text-opacity-75 font-semibold">Group Size</span>
-          <span className="text-gray-500 text-lg flex gap-2"><Users className="text-red-600 w-8 h-8" /><span className="mt-1 font-semibold">SIze</span> </span>
-        </div>
-      </div>
-
-     
-   
-      
-      </div>
+      <h3 className='text-xl text-gray-600 font-serif ml-14'text-4xl font-serif>Gravity Hotel & Aqua Park Sahl Hasheesh</h3>
     </div>
     <hr className="w-[60%] m-auto" />
   
     <Link 
       className="m-auto w-[20% ] flex justify-center "
-      to={`/TourDetails/Personal_Information`}>
+      to={`/Hotelinformation`}>
         
       <button class="group mb-12 mt-9 relative h-16 w-72 overflow-hidden rounded-xl bg-white text-xl font-serif shadow-2xl shadow-red-100">
         <div class="absolute inset-0 w-12 bg-red-600 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
@@ -198,61 +172,31 @@ const {currentTrip}=useSelector((state)=>state.trip)
       </button>
     </Link>
 
-
-    <div className="px-4 md:px-20 py-8 max-w-4xl">
-  <h2 className="mb-6 text-3xl text-black text-opacity-75 font-semibold">Tour description</h2>
-  <p className="mb-4 font-serif ml-5 text-gray-500 text-lg leading-relaxed">
-   kkkkkkkkkkk
-  </p>
-</div>
-
-<div className="px-4 md:px-20 py-8 text-gray-800 max-w-4xl space-y-8">
+    <hr className="w-[60%] m-auto" />
 
 
-  <div>
-    <h2 className="font-serif text-2xl text-black text-opacity-75 font-semibold mb-4">Inclusions</h2>
-    <ul className="list-disc space-y-1 ml-6 text-lg mb-4 font-serif text-gray-500 leading-relaxed">
+    
+
+<div className="px-4 md:px-20 py-8 text-gray-800  space-y-8">
+
+
+  <div className=''>
+    <h2 className="font-serif text-3xl text-black text-opacity-85 mb-8">Most popular facilities</h2>
+    <ul className="list-disc ml-6 text-lg mb-4 font-serif marker:text-red-700 gap-5 grid grid-cols-3 text-gray-600 leading-relaxed">
     
       <li>Hotel pick-up and drop-off</li>
       <li>Entrance fees</li>
       <li>Certified Egyptologist</li>
       <li>Insurance</li>
+      <li>Transfer service</li>
+      <li>Multiligual staff</li>
+      <li>Wheelchair accessible</li>
+      <li>Car hire</li>
+      <li>Sandy beach</li>
     </ul>
   </div>
-
-  <div>
-    <h2 className="text-2xl font-serif font-semibold mb-4 text-black text-opacity-75">Exclusions</h2>
-    <ul className="list-disc space-y-1 ml-6 mb-4 text-lg font-serif text-gray-500 leading-relaxed">
-      <li>Lunch or Drinks</li>
-    </ul>
-  </div>
-  <div>
-    <h2 className="text-2xl font-serif font-semibold mb-4 text-black text-opacity-75">Meeting point</h2>
-    <p className="list-disc space-y-1 ml-5 mb-4 font-serif text-lg text-gray-500 leading-relaxed">Meeting</p>
-  </div>
-
-
-  <div>
-    <h2 className="text-2xl font-serif font-semibold mb-4 text-black text-opacity-75">Know in advance</h2>
-    <ul className="list-disc space-y-1 ml-6 mb-4 font-serif text-lg text-gray-500 leading-relaxed">
-      <li>
-        Please wear comfortable clothes, and bring your hat, sunglasses, water, camera and money for shopping and tipping.
-      </li>
-      <li>
-        Please leave your accommodation and contact details during booking process.
-      </li>
-      <li>
-        Travco Team will contact you 24 hours prior tour date to reconfirm the pickup time and locations.
-      </li>
-      <li>
-        For further assistance, you can communicate with the team directly at any time.
-      </li>
-    </ul>
-  </div>
-  <div>
-    <h2 className="text-2xl font-serif font-semibold mb-4 text-black text-opacity-75">Cancellation policy</h2>
-    <p className="list-disc space-y-1 ml-6 mb-4 font-serif text-lg text-gray-500 leading-relaxed">xcxzzzz</p>
-  </div>
+  
+  
 </div>
 
     </>

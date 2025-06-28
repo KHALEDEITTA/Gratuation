@@ -22,6 +22,8 @@ import 'aos/dist/aos.css';
 import TravcoPage from './Components/tour/tour.jsx'
 import NileCruises from './Components/Nile Cruises/Nile_Cruises.jsx'
 import TourNile from './Components/TourNile/TourNile.jsx'
+import Hotel_Information from './Components/Hotels/Hotel_Information/Hotel_Information.jsx'
+import Personal_Hotel from './Components/Hotels/Personal_Hotel/Personal_Hotel.jsx'
 function App() {
   
 
@@ -55,6 +57,8 @@ function App() {
       <Route path="/NileCruises" element={<NileCruises />} />
       <Route path="/Hotel" element={<Hotel />} />
       <Route path="/NileCruises/:id" element={<TourNile />} />
+      <Route path="/Hotelinformation" element={<Hotel_Information/> } />
+      <Route path="/PersonalHotel" element={<Personal_Hotel/> } />
 
     </Routes>
     <Footer />

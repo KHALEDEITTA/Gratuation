@@ -1,7 +1,7 @@
 import { Menu, X } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import logo from "../../Assets/p2.jpg"
+// import logo from "../../Assets/Screenshot 2025-06-27 193506.jpg"
 import { auth } from '../Login/firebaseConfig';
 import { signOut } from 'firebase/auth';
 import { LogOut, ShoppingCart, User } from "lucide-react";
@@ -51,7 +51,10 @@ const handleLogin = () => setIsLoggedIn(true);
       
         {/* logo */}
       <Link to={"/"}>
-      <img src={logo} alt="imag" className='h-16 w-auto rounded-md' />
+      {/* <img src={logo} alt="imag" className='h-16 w-auto rounded-md' /> */}
+<h1 className={`text-3xl font-serif font-semibold tracking-wide text-transparent bg-  ${scrolled ? "bg-clip-text bg-gradient-to-l from-red-400 to-gray-100" :"bg-clip-text bg-white"  } `}>
+  <span className='text-4xl'>FAV</span>TOUR
+</h1>
       </Link>
 
         {/* Links */}

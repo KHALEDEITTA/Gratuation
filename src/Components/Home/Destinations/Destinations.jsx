@@ -196,13 +196,14 @@ const {list}=useSelector((state)=>state.destinations)
         
         <div key={index} className={`relative rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:shadow-o transition-shadow duration-300 group w-[320px] h-[340px]`}>
       <img
-        src={dest.coverPhoto?    `http://localhost:8080/favtour/photos/destination/${dest.destinationId}/${dest.coverPhoto}`:image_1}
+        src={dest.coverPhoto?   `http://localhost:8080/favtour/photos/destination/${dest.destinationId}/${dest.coverPhoto}`:image_1}
         alt={dest.destinationName}
         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
       />
       <div > 
         cvf
       </div>
+      {console.log(dest)}
 
       <div className="absolute inset-0 bg-black bg-opacity-5 group-hover:bg-opacity-10 transition duration-300" />
 
