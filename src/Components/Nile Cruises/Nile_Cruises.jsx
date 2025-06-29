@@ -8,7 +8,7 @@ import { fetchAllItineraries } from '../../store/iteriations/iterationslic';
 import { all } from 'axios';
 
 const TourNile = ({ tour }) => (
- <Link to={`/TourDetails/${tour.id}`}> <div className="bg-white rounded-2xl shadow-sm hover:shadow-2xl p-4 hover:text-red-600 w-full md:w-[300px] h-[390px]">
+  <div className="bg-white rounded-2xl shadow-sm hover:shadow-2xl p-4 hover:text-red-600 w-full md:w-[300px] h-[390px]">
     <img src={tour.coverImage || img1} alt={tour.label} className="rounded-2xl mb-3 h-[180px] w-full object-cover" />
     <h3 className="mb-1.5">{tour.label}</h3>
 
@@ -27,7 +27,7 @@ const TourNile = ({ tour }) => (
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-1 lucide lucide-dollar-sign-icon lucide-dollar-sign"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
          {tour.price}</span>
     </p>
-  </div></Link>
+  </div>
 );
 
 

@@ -24,6 +24,7 @@ import NileCruises from './Components/Nile Cruises/Nile_Cruises.jsx'
 import TourNile from './Components/TourNile/TourNile.jsx'
 import Hotel_Information from './Components/Hotels/Hotel_Information/Hotel_Information.jsx'
 import Personal_Hotel from './Components/Hotels/Personal_Hotel/Personal_Hotel.jsx'
+import Personal_InformationForNile from './Components/TourNile/personalinformation_for_nileCursies.jsx'
 function App() {
   
 
@@ -45,6 +46,7 @@ function App() {
       <Route path='/contactus' element={    <ProtectedRoute><ContactUs /></ProtectedRoute>} />
       <Route path='/TourDetails/:id' element={    <ProtectedRoute><TourDetails /></ProtectedRoute>} />
       <Route path='/TourDetails/:id/Personal_Information' element={   <ProtectedRoute><Personal_Information /> </ProtectedRoute>} />
+      <Route path='/ForNileDetails/:id/Personal_InformationForNile' element={   <ProtectedRoute><Personal_InformationForNile /> </ProtectedRoute>} />
       <Route path='/Hotels' element={   <ProtectedRoute><Hotel /> </ProtectedRoute>} />
       <Route path='/TourCard/:id' element={  <ProtectedRoute><TourCard />  </ProtectedRoute>} />
       <Route path='/TopDestinations' element={  <ProtectedRoute><TopDestinations />  </ProtectedRoute>} />

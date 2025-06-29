@@ -6,7 +6,7 @@ export const bookTrip = createAsyncThunk(
   'booking/bookTrip',
   async ({ tripId, bookingData }, thunkAPI) => {
     try {
-      const response = await axiosInstance.post(`/trips/${tripId}/book`, bookingData);
+      const response = await axiosInstance.post(`/trips/${tripId}/order`, bookingData);
       sessionStorage.setItem('bookingId',response.data.data.bookingId)
       console.log(response.data.data.bookingId)
       return response.data;
@@ -19,7 +19,7 @@ export const bookingUser = createAsyncThunk(
   'booking/bookUser',
   async ( thunkAPI) => {
     try {
-      const response = await axiosInstance.get(`/user/bookings`);
+      const response = await axiosInstance.get(`/user/orders`);
     //   sessionStorage.setItem('bookingId',response.data.data.bookingId)
       console.log(response.data.data.bookingId)
       return await response.data.data;
@@ -35,7 +35,7 @@ export const bookingCancle = createAsyncThunk(
   'booking/bookingCancle',
   async ({ userid }, thunkAPI) => {
     try {
-      const response = await axiosInstance.put(`/bookings/${userid}/cancel`);
+      const response = await axiosInstance.put(`/orders/${userid}/cancel`);
 
       const { success, message } = response.data;
 

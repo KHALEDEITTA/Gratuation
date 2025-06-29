@@ -188,7 +188,7 @@ export default function TourNile() {
 
     <Link 
         className="m-auto w-[20% ] flex justify-center "
-        to={`/TourDetails/${currentCruise}/Personal_Information`}>{/*.tripId */}
+        to={`/ForNileDetails/${currentCruise}/Personal_InformationForNile`}>{/*.tripId */}
         
         <button className="group mb-12 mt-9 relative h-16 w-72 overflow-hidden rounded-xl bg-white text-xl font-serif shadow-2xl shadow-red-100">
             <div className="absolute inset-0 w-12 bg-red-600 transition-all duration-[250ms] ease-out group-hover:w-full"></div>

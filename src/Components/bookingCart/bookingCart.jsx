@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 import { bookingCancle, bookingUser, bookTrip } from "../../store/booking/bookingslic";
+import { createPaymentSession } from "../../store/payment/paymentslic";
 
 
 export default function Cart() {
@@ -20,10 +21,16 @@ const {list}=useSelector((state)=>state.booking)
     await dispatch(bookingUser())
   }
 
+  const handlePay = async (bookingId) => {
+    
+    if (bookingId) {
+      const result = await dispatch(createPaymentSession({ bookingId }));
+      if (result.meta.requestStatus === 'fulfilled') {
+        window.location.href = result.payload; // فتح صفحة الدفع
+      }}}
     return (
         <>
             <div className="pt-5 " >
-                <h3 className="text-gray-700 text-4xl font-inter font-bold tracking-normal leading-none pl-5 ">product in card</h3>
             </div>
             {list.length > 0 ? (
                 <div className="mt-5 py-5 container mx-auto">
@@ -33,8 +40,8 @@ const {list}=useSelector((state)=>state.booking)
                                 <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">#</th>
                                 <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">image</th>
                                                                 <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">name</th>
-                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">tripDate</th>
-                                 <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">BookingDate</th>
+                                <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">orderType</th>
+                                 {/* <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">BookingDate</th> */}
                                 <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">Total Price </th>
 
                                 <th className="text-left py-2 px-4 bg-gray-700 rounded text-white">payment </th>
@@ -46,15 +53,15 @@ const {list}=useSelector((state)=>state.booking)
                                 <tr key={book.bookingId} className="hover:bg-gray-100">
                                     <td className="text-center py-2">{1+index}</td>
                                     <td className="py-2 px-4">
-                                        <img src={book.tripCoverPhoto} alt={book.tripLabel} className="w-16 h-16 object-cover rounded-lg shadow-md" />
+                                        <img src={book.orderCoverPhoto} alt={book.tripLabel} className="w-16 h-16 object-cover rounded-lg shadow-md" />
                                     </td>
                                       <td className="py-2 px-4 flex items-center justify-center space-x-2">
                                       
-                                        <div className="text-center font-semibold max-w-[200px]">{book.tripLabel}</div>
+                                        <div className="text-center font-semibold max-w-[200px]">{book.orderName}</div>
                                        
                                     </td>
-                                    <td className="py-2 px-4">{book.tripDate}</td>
-                                          <td className="py-2 px-4">{book.createdAt}</td>
+                                    <td className="py-2 px-4">{book.orderType}</td>
+                                          {/* <td className="py-2 px-4">{book.createdAt}</td> */}
                                     <td className="py-2 px-4">{book.totalPrice} $</td>
                                   
                                     <td className="py-2 px-4">{ book.bookingStatus==="APPROVED" ?
@@ -63,10 +70,10 @@ const {list}=useSelector((state)=>state.booking)
     </span>
 
                        
-: book.bookingStatus==="PENDING" ?
+: book.orderStatus==="PENDING" ?
             
            
-                                      <span className={`inline-flex items-center px-3 py-2 rounded-xl text-sm font-semibold bg-yellow-600 text-white`}>
+                                      <span className={`inline-flex items-center px-3 py-2 rounded-xl text-sm font-semibold bg-gray-400 text-white`}>
       <span className="mr-1">⏳</span> pending
     </span>                 :              <span className={`inline-flex items-center px-3 py-2 rounded-xl text-sm font-semibold bg-red-700 text-white`}>
       <span className="mr-1">❌ </span> cancelled
@@ -78,8 +85,15 @@ const {list}=useSelector((state)=>state.booking)
                                         
                                          </td>
                                     <td className="py-2 px-4">
+                                         <button 
+                                          
+                                            className={`${book.orderStatus ==="PENDING"? "bg-green-500 hover:bg-green-700":"bg-slate-400 hover:bg-green-700" } mx-1 text-white px-6 py-2 rounded-lg `}
+                                        onClick={()=>handlePay(book.orderId)}
+                                        >
+                                            pay
+                                        </button>
                                         {
-                                            book.bookingStatus==='CANCELLED'?
+                                            book.orderStatus==='CANCELLED'?
                                              <button 
                                              disabled
                                             className="bg-gray-500 text-white px-6 py-2 rounded-lg"
@@ -89,7 +103,7 @@ const {list}=useSelector((state)=>state.booking)
                                         </button>:
                                          <button
                                             className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-700"
-                                            onClick={() =>onCancell(book.bookingId)}
+                                            onClick={() =>onCancell(book.orderId)}
                                         >
                                             cancel
                                         </button>

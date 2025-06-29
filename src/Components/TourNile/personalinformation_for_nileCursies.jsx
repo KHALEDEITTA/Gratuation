@@ -46,7 +46,7 @@ function InputField({ label,setItem, type = "text", textarea = false ,placeholde
   }
 
 
-export default function Personal_Information() {
+export default function Personal_InformationForNile() {
  const param=useParams()
  const dispatch=useDispatch()
   useEffect(()=>{

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPlaneDeparture, FaPlaneArrival } from "react-icons/fa";
 import { FaMapMarkerAlt, FaCalendarAlt, FaUser } from "react-icons/fa";
-import { Link } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router";
+import { fetchalldestination } from "../../../store/destinationslic";
 
 
 export default function Filter() {
@@ -10,7 +12,18 @@ export default function Filter() {
   const [startDate, setStartDate] = useState("");
   const [Childs, setChilds] = useState("");
    const [Adults, setAdults] = useState();
-
+const dispatch=useDispatch()
+useEffect(()=>{
+dispatch((fetchalldestination())
+)
+},[])
+const {list}=useSelector((state)=>state.destinations)
+const navagite=useNavigate()
+const onsubmitted=()=>{
+  if(destination){
+navagite(`/TourCard/${destination}`)
+  }
+}
   return (
     <>
       <div className='mb-20 px-28'>
@@ -29,12 +42,10 @@ export default function Filter() {
                     onChange={(e) => setDestination(e.target.value)}
                     className="outline-none pr-4"
                   >
-                    <option value="">Select Destination</option>
-                    <option value="cairo">Cairo</option>
-                    <option value="hurghada">Hurghada</option>
-                    <option value="aswan">Aswan</option>
-                    <option value="sharm el-sheikh">Sharm El-Sheikh</option>
-                    <option value="luxor">Luxor</option>
+                  {list?.map((i)=>(
+   <option value={i.destinationId}>{i.destinationName}</option>
+                  ))}
+                 
                   </select>
                 </div>
               </div>
@@ -98,7 +109,7 @@ export default function Filter() {
                     onChange={(e) => setChilds(e.target.value)}
                     className="outline-none pe-10"
                   >
-                    <option value="">0 Child</option>
+                    <option value="0">0 Child</option>
                     <option value="1">1 Child</option>
                     <option value="2">2 Child</option>
                     <option value="3">3 Child</option>
@@ -108,8 +119,8 @@ export default function Filter() {
             </div>
       
             {/* Search Button */}
-            <Link
-            to={'/TourCard'}
+            <button
+          onClick={()=>onsubmitted()}
             className="bg-red-600 text-white px-10 py-3 rounded-lg flex items-center gap-2 hover:bg-red-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +132,7 @@ export default function Filter() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M16.65 10.15a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" />
               </svg>
               Search
-            </Link>
+            </button>
           </div>
             </div>
     </>
